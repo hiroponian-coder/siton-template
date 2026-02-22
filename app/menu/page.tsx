@@ -1,0 +1,1 @@
+import Header from '@/components/Header'; import MenuHero from '@/components/MenuHero'; import ProductGrid from '@/components/ProductGrid'; import Footer from '@/components/Footer'; export default function Menu() { return ( <main className="min-h-screen bg-[#FAFAFA]"> <Header /> <MenuHero /> <ProductGrid /> <Footer /> </main> ); }

@@ -1,18 +1,1 @@
-import Hero from '@/components/Hero';
-import FeaturedProducts from '@/components/FeaturedProducts';
-import AboutSection from '@/components/AboutSection';
-
-export const metadata = {
-  title: 'ホーム | GitHub Push Test',
-  description: '焼きたてのパンを提供する「GitHub Push Test」の公式ウェブサイト。',
-};
-
-export default function Home() {
-  return (
-    <>
-      <Hero />
-      <FeaturedProducts />
-      <AboutSection />
-    </>
-  );
-}
+import Header from '@/components/Header'; import Hero from '@/components/Hero'; import AboutUs from '@/components/AboutUs'; import FeaturedProducts from '@/components/FeaturedProducts'; import Access from '@/components/Access'; import Footer from '@/components/Footer'; export default function Home() { return ( <main className="min-h-screen bg-[#FAFAFA]"> <Header /> <Hero /> <AboutUs /> <FeaturedProducts /> <Access /> <Footer /> </main> ); }

@@ -1,0 +1,1 @@
+import Header from '@/components/Header'; import ContactForm from '@/components/ContactForm'; import Footer from '@/components/Footer'; export default function Contact() { return ( <main className="min-h-screen bg-[#FAFAFA]"> <Header /> <ContactForm /> <Footer /> </main> ); }
