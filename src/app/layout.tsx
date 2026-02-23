@@ -1,19 +1,22 @@
-import type { Metadata } from 'next';
-import './globals.css';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Agent 3 Error Injection Test',
-  description: 'Buggy IT Test environment',
+  title: "Error Test - System Bug Control",
+  description: "Trigger error environment",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
-      <body className="bg-[#000000] text-[#33FF00] min-h-screen flex flex-col font-mono selection:bg-[#E50914] selection:text-[#FFFF00]">
+      <body className={`${inter.className} bg-[#000000] text-[#cccccc] min-h-screen flex flex-col`}>
         {children}
       </body>
     </html>

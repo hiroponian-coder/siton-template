@@ -1,14 +1,17 @@
-import { Bug } from 'lucide-react';
+import { Power } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="mt-auto border-t-2 border-[#33FF00] p-6 bg-[#000000] text-center flex flex-col items-center justify-center gap-2">
-      <div className="flex items-center gap-2 text-[#FFFF00]">
-        <Bug size={20} className="animate-bounce" />
-        <span className="uppercase text-xs font-bold tracking-widest">System Failure Imminent</span>
-        <Bug size={20} className="animate-bounce" />
+    <footer className="border-t border-[#00ff66]/30 bg-[#000000] mt-auto">
+      <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between">
+        <p className="text-xs text-[#cccccc]/60 font-mono">
+          © {new Date().getFullYear()} ERROR_TEST_SYS. All bugs reserved.
+        </p>
+        <div className="flex items-center gap-2 mt-4 md:mt-0 text-[#00ff66] text-xs font-mono">
+          <Power className="w-4 h-4" />
+          SYSTEM ONLINE
+        </div>
       </div>
-      <p className="text-xs opacity-70">© {new Date().getFullYear()} Agent 3 Error Injection Test. All bugs reserved.</p>
     </footer>
   );
 }

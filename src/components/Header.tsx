@@ -1,28 +1,32 @@
 import Link from 'next/link';
-import { Terminal, AlertTriangle } from 'lucide-react';
+import { Bug, Terminal, ShieldAlert } from 'lucide-react';
 
 export default function Header() {
   return (
-    <header className="border-b-2 border-[#E50914] bg-[#000000] p-4 flex justify-between items-center sticky top-0 z-50">
-      <Link href="/" className="flex items-center gap-2 text-[#E50914] hover:text-[#FFFF00] transition-colors">
-        <Terminal size={24} className="animate-pulse" />
-        <span className="font-bold text-xl tracking-tighter uppercase">Agent_3_Test</span>
-      </Link>
-      <nav>
-        <ul className="flex gap-6">
-          <li>
-            <Link href="/" className="hover:text-[#FFFF00] hover:underline decoration-[#E50914] underline-offset-4 transition-all uppercase text-sm font-bold">
-              [ Home ]
+    <header className="border-b border-[#ff0033]/30 bg-[#000000]/80 backdrop-blur-md sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center gap-2">
+            <Bug className="w-8 h-8 text-[#ff0033] animate-pulse" />
+            <Link href="/" className="text-xl font-bold tracking-widest text-[#cccccc] hover:text-[#00ff66] transition-colors">
+              ERROR_TEST
             </Link>
-          </li>
-          <li>
-            <Link href="/test" className="hover:text-[#E50914] hover:underline decoration-[#FFFF00] underline-offset-4 transition-all uppercase text-sm font-bold flex items-center gap-1">
-              <AlertTriangle size={16} />
-              [ Error_Test ]
+          </div>
+          <nav className="flex space-x-8">
+            <Link href="/" className="flex items-center gap-2 text-sm font-medium hover:text-[#00ff66] transition-colors">
+              <Terminal className="w-4 h-4" />
+              INIT
             </Link>
-          </li>
-        </ul>
-      </nav>
+            <Link href="/trigger" className="flex items-center gap-2 text-sm font-medium hover:text-[#ff0033] transition-colors">
+              <ShieldAlert className="w-4 h-4" />
+              TRIGGER
+            </Link>
+            <Link href="/fatal-crash" className="flex items-center gap-2 text-sm font-medium text-[#ff0033] hover:text-[#cccccc] transition-colors">
+              FATAL
+            </Link>
+          </nav>
+        </div>
+      </div>
     </header>
   );
 }
