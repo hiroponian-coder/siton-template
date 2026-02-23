@@ -1,1 +1,54 @@
-import Link from 'next/link'; import { Croissant, Instagram, Twitter, Facebook } from 'lucide-react'; export default function Footer() { return ( <footer className="bg-[#212121] text-[#FAFAFA] pt-16 pb-8 border-t-4 border-[#D97736]"> <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12"> <div className="col-span-1 md:col-span-2"> <Link href="/" className="flex items-center space-x-2 mb-6"> <Croissant className="w-8 h-8 text-[#D97736]" /> <span className="font-bold text-2xl text-white">ベーカリー サイトン</span> </Link> <p className="text-gray-400 mb-6 max-w-sm"> 毎朝4時から仕込む、国産小麦100%のこだわりパン屋。モダンな空間で極上の時間を提供します。 </p> <div className="flex space-x-4"> <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#D97736] transition-colors"> <Instagram className="w-5 h-5 text-white" /> </a> <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#D97736] transition-colors"> <Twitter className="w-5 h-5 text-white" /> </a> <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#D97736] transition-colors"> <Facebook className="w-5 h-5 text-white" /> </a> </div> </div> <div> <h3 className="text-lg font-bold mb-6 text-white">リンク</h3> <ul className="space-y-4"> <li><Link href="/" className="text-gray-400 hover:text-[#D97736] transition-colors">ホーム</Link></li> <li><Link href="/menu" className="text-gray-400 hover:text-[#D97736] transition-colors">メニュー</Link></li> <li><Link href="/about" className="text-gray-400 hover:text-[#D97736] transition-colors">店舗情報・アクセス</Link></li> <li><Link href="/contact" className="text-gray-400 hover:text-[#D97736] transition-colors">お問い合わせ</Link></li> </ul> </div> <div> <h3 className="text-lg font-bold mb-6 text-white">お問い合わせ</h3> <ul className="space-y-4 text-gray-400"> <li>〒100-0000</li> <li>東京都千代田区パン町1-2-3</li> <li>03-0000-0000</li> <li>info@bakery-saiton.example.com</li> </ul> </div> </div> <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm"> &copy; {new Date().getFullYear()} Bakery Saiton. All rights reserved. </div> </div> </footer> ); }
+import Link from "next/link";
+import { Building2, Phone, Mail, MapPin } from "lucide-react";
+
+export default function Footer() {
+  return (
+    <footer className="bg-[#1F2937] text-[#FFFFFF] pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+          <div>
+            <Link href="/" className="flex items-center gap-2 mb-6">
+              <Building2 className="h-8 w-8 text-[#3B82F6]" />
+              <span className="text-2xl font-bold tracking-tight">アイビス不動産</span>
+            </Link>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              私たちは、お客様一人ひとりのライフスタイルに寄り添い、「最高の住まい」を見つけるお手伝いをいたします。
+            </p>
+          </div>
+          
+          <div>
+            <h3 className="text-lg font-bold mb-6 border-b border-gray-700 pb-2 inline-block">お問い合わせ</h3>
+            <ul className="space-y-4 text-gray-400">
+              <li className="flex items-center gap-3">
+                <MapPin className="h-5 w-5 text-[#3B82F6]" />
+                <span>東京都千代田区丸の内1-1-1</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="h-5 w-5 text-[#3B82F6]" />
+                <span>03-1234-5678</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail className="h-5 w-5 text-[#3B82F6]" />
+                <span>info@ibis-realestate.example.com</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-bold mb-6 border-b border-gray-700 pb-2 inline-block">リンク</h3>
+            <ul className="space-y-3 text-gray-400">
+              <li><Link href="/" className="hover:text-[#3B82F6] transition-colors">ホーム</Link></li>
+              <li><Link href="/properties" className="hover:text-[#3B82F6] transition-colors">物件情報</Link></li>
+              <li><Link href="/about" className="hover:text-[#3B82F6] transition-colors">会社概要</Link></li>
+              <li><Link href="/contact" className="hover:text-[#3B82F6] transition-colors">お問い合わせ</Link></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div className="border-t border-gray-700 pt-8 text-center text-gray-500 text-sm">
+          <p>&copy; {new Date().getFullYear()} Ibis Real Estate. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}

@@ -1,1 +1,13 @@
-import Header from '@/components/Header'; import Hero from '@/components/Hero'; import AboutUs from '@/components/AboutUs'; import FeaturedProducts from '@/components/FeaturedProducts'; import Access from '@/components/Access'; import Footer from '@/components/Footer'; export default function Home() { return ( <main className="min-h-screen bg-[#FAFAFA]"> <Header /> <Hero /> <AboutUs /> <FeaturedProducts /> <Access /> <Footer /> </main> ); }
+import Hero from "@/components/Hero";
+import FeaturedProperties from "@/components/FeaturedProperties";
+import CompanyOverview from "@/components/CompanyOverview";
+
+export default function HomePage() {
+  return (
+    <>
+      <Hero />
+      <FeaturedProperties />
+      <CompanyOverview />
+    </>
+  );
+}
