@@ -1,31 +1,20 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-
-const inter = Inter({ subsets: ["latin"] });
+import type { Metadata } from 'next';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "アイビス不動産 | 最高の住まいを見つける",
-  description: "アイビス不動産のトップページ。最新の物件情報や会社概要をご覧いただけます。プロフェッショナルなサービスで最適な住まい探しをサポートします。",
+  title: 'Agent 3 Error Injection Test',
+  description: 'Buggy IT Test environment',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="ja">
-      <body className={inter.className}>
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-grow pt-20">
-            {children}
-          </main>
-          <Footer />
-        </div>
+    <html lang="en">
+      <body className="bg-[#000000] text-[#33FF00] min-h-screen flex flex-col font-mono selection:bg-[#E50914] selection:text-[#FFFF00]">
+        {children}
       </body>
     </html>
   );
