@@ -1,17 +1,1 @@
-import { Power } from 'lucide-react';
-
-export default function Footer() {
-  return (
-    <footer className="border-t border-[#00ff66]/30 bg-[#000000] mt-auto">
-      <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between">
-        <p className="text-xs text-[#cccccc]/60 font-mono">
-          © {new Date().getFullYear()} ERROR_TEST_SYS. All bugs reserved.
-        </p>
-        <div className="flex items-center gap-2 mt-4 md:mt-0 text-[#00ff66] text-xs font-mono">
-          <Power className="w-4 h-4" />
-          SYSTEM ONLINE
-        </div>
-      </div>
-    </footer>
-  );
-}
+import Link from 'next/link'; import { Instagram, Twitter, Facebook } from 'lucide-react'; export default function Footer() { return ( <footer className="bg-[#1A1A1A] text-[#FAFAFA] pt-16 pb-8"> <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8"> <div> <h3 className="text-2xl font-bold tracking-wider mb-6 text-[#C5A880]">カフェサイトン</h3> <p className="text-sm text-gray-400 mb-6 leading-relaxed">モダンで落ち着いた空間で特別な一杯を。厳選されたコーヒー豆と自家製ペストリーをご用意してお待ちしております。</p> <div className="flex space-x-4"> <a href="#" className="text-gray-400 hover:text-[#C5A880] transition-colors"><Instagram className="w-5 h-5"/></a> <a href="#" className="text-gray-400 hover:text-[#C5A880] transition-colors"><Twitter className="w-5 h-5"/></a> <a href="#" className="text-gray-400 hover:text-[#C5A880] transition-colors"><Facebook className="w-5 h-5"/></a> </div> </div> <div> <h4 className="text-lg font-semibold mb-6">Links</h4> <ul className="space-y-3"> <li><Link href="/" className="text-gray-400 hover:text-[#C5A880] transition-colors">Home</Link></li> <li><Link href="/menu" className="text-gray-400 hover:text-[#C5A880] transition-colors">Menu</Link></li> <li><Link href="/about" className="text-gray-400 hover:text-[#C5A880] transition-colors">About</Link></li> <li><Link href="/access" className="text-gray-400 hover:text-[#C5A880] transition-colors">Access</Link></li> </ul> </div> <div> <h4 className="text-lg font-semibold mb-6">Contact</h4> <ul className="space-y-3 text-sm text-gray-400"> <li className="flex items-start"><span className="w-20 inline-block font-medium text-gray-300">Address:</span> <span>〒100-0001<br/>東京都千代田区1-1-1<br/>サイトンビル 1F</span></li> <li className="flex items-center"><span className="w-20 inline-block font-medium text-gray-300">Tel:</span> <span>03-1234-5678</span></li> <li className="flex items-center"><span className="w-20 inline-block font-medium text-gray-300">Open:</span> <span>08:00 - 20:00 (Tue Closed)</span></li> </ul> </div> </div> <div className="mt-16 pt-8 border-t border-gray-800 text-center text-sm text-gray-500"> <p>&copy; {new Date().getFullYear()} Cafe Saiton. All rights reserved.</p> </div> </div> </footer> ); }

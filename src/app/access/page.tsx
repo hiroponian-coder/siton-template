@@ -1,0 +1,1 @@
+import PageTitle from '@/components/PageTitle'; import AccessMap from '@/components/access/AccessMap'; import StoreInformation from '@/components/access/StoreInformation'; export default function Access() { return ( <div> <PageTitle title="Access" description="店舗の所在地、営業時間、交通アクセスのご案内です。" /> <AccessMap /> <StoreInformation /> </div> ); }
