@@ -1,11 +1,12 @@
 import './globals.css';
+import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata = {
-  title: 'カフェサイトン | 心温まるシカ焙煎コーヒー',
-  description: '自慢の「シカ焙煎コーヒー」と温もりあふれる空間を提供するカフェサイトンの公式サイトです。こだわりの一杯で、ほっとするひとときをお過ごしください。',
+export const metadata: Metadata = {
+  title: 'カフェサイトン3 - モダンな空間で楽しむ究極の一杯',
+  description: '洗練されたデザインと厳選された豆で提供するスペシャリティコーヒー。',
 };
 
 export default function RootLayout({
@@ -15,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className={`${inter.className} bg-[#FDFBF7] text-[#2C1E16] antialiased`}>
+      <body className={`${inter.className} bg-[#FAFAFA] text-[#2D3436]`}>
         {children}
       </body>
     </html>

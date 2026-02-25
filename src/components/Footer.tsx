@@ -1,60 +1,50 @@
 import { Profile } from '@/types/profile';
-import Link from 'next/link';
-import { Coffee, Instagram, Twitter, MessageCircle } from 'lucide-react';
+import { Instagram, Twitter, MessageCircle } from 'lucide-react';
 
 export default function Footer({ profile }: { profile: Profile }) {
   return (
-    <footer className="bg-[#2C1E16] text-[#FDFBF7]/80 py-16 px-4">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
-        <div>
-          <Link href="/" className="flex items-center gap-2 text-white mb-6">
-            <Coffee className="w-6 h-6 text-[#D47A55]" />
-            <span className="font-bold text-xl">{profile.store_name || 'Cafe Sighton'}</span>
-          </Link>
-          {profile.design_atmosphere && (
-            <p className="text-sm leading-relaxed max-w-xs">
-              {profile.design_atmosphere.slice(0, 100)}{profile.design_atmosphere.length > 100 ? '...' : ''}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <h3 className="text-white font-semibold mb-6">Explore</h3>
-          <ul className="space-y-4">
-            <li><Link href="/" className="hover:text-[#D47A55] transition-colors">Home</Link></li>
-            <li><Link href="/menu" className="hover:text-[#D47A55] transition-colors">Menu</Link></li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-white font-semibold mb-6">Connect</h3>
-          <div className="flex gap-4 mb-6">
-            {profile.instagram_id && (
-              <a href={`https://instagram.com/${profile.instagram_id}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-[#D47A55] hover:text-white transition-all">
-                <Instagram className="w-5 h-5" />
-              </a>
-            )}
-            {profile.x_id && (
-              <a href={`https://twitter.com/${profile.x_id}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-[#D47A55] hover:text-white transition-all">
-                <Twitter className="w-5 h-5" />
-              </a>
-            )}
-            {profile.line_id && (
-              <a href={`https://line.me/R/ti/p/@${profile.line_id}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-[#D47A55] hover:text-white transition-all">
-                <MessageCircle className="w-5 h-5" />
-              </a>
-            )}
-          </div>
-          {profile.contact_method && (
-            <div className="text-sm">
-              <span className="block text-white/50 mb-1">Contact</span>
-              {profile.contact_method}
+    <footer className="bg-[#FAFAFA] border-t border-gray-200 pt-20 pb-10">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between mb-20">
+          <div className="mb-12 md:mb-0">
+            <h2 className="text-3xl font-bold tracking-tighter mb-6">{profile.store_name}</h2>
+            <div className="flex space-x-6">
+              {profile.instagram_id && (
+                <a href={`https://instagram.com/${profile.instagram_id}`} className="text-gray-400 hover:text-[#D4AF37] transition-colors">
+                  <Instagram size={24} />
+                </a>
+              )}
+              {profile.x_id && (
+                <a href={`https://twitter.com/${profile.x_id}`} className="text-gray-400 hover:text-[#D4AF37] transition-colors">
+                  <Twitter size={24} />
+                </a>
+              )}
             </div>
-          )}
+          </div>
+          
+          <div className="grid grid-cols-2 gap-16">
+            <div>
+              <p className="font-bold mb-6 tracking-widest text-xs uppercase">Explore</p>
+              <ul className="space-y-4 text-sm text-gray-500">
+                <li><a href="/" className="hover:text-[#D4AF37]">Home</a></li>
+                <li><a href="/menu" className="hover:text-[#D4AF37]">Menu</a></li>
+                <li><a href="/about" className="hover:text-[#D4AF37]">Our Story</a></li>
+              </ul>
+            </div>
+            <div>
+              <p className="font-bold mb-6 tracking-widest text-xs uppercase">Official</p>
+              <ul className="space-y-4 text-sm text-gray-500">
+                {profile.line_id && <li><a href="#" className="hover:text-[#D4AF37]">LINE Official</a></li>}
+                <li><a href="#" className="hover:text-[#D4AF37]">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-[#D4AF37]">Privacy Policy</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="max-w-6xl mx-auto mt-16 pt-8 border-t border-white/10 text-center text-sm text-white/50">
-        &copy; {new Date().getFullYear()} {profile.store_name || 'Cafe Sighton'}. All rights reserved.
+        
+        <div className="border-t border-gray-100 pt-10 text-center text-xs text-gray-400 tracking-widest">
+          &copy; {new Date().getFullYear()} {profile.store_name}. ALL RIGHTS RESERVED.
+        </div>
       </div>
     </footer>
   );
