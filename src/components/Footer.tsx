@@ -1,56 +1,60 @@
-import { Profile } from '@/types';
-import { Instagram, Twitter, MessageCircle } from 'lucide-react';
+import { Profile } from '@/types/profile';
+import Link from 'next/link';
+import { Coffee, Instagram, Twitter, MessageCircle } from 'lucide-react';
 
 export default function Footer({ profile }: { profile: Profile }) {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="bg-[#3E2723] text-white pt-16 pb-8 px-4 border-t-8 border-[#FDCB6E]">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
+    <footer className="bg-[#2C1E16] text-[#FDFBF7]/80 py-16 px-4">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
         <div>
-          <h2 className="text-3xl font-black text-[#FF6B81] mb-4">
-            {profile.store_name || 'Cafe Sighton'}
-          </h2>
-          {profile.store_strengths && (
-            <p className="text-white/80 font-medium leading-relaxed">
-              {profile.store_strengths}
+          <Link href="/" className="flex items-center gap-2 text-white mb-6">
+            <Coffee className="w-6 h-6 text-[#D47A55]" />
+            <span className="font-bold text-xl">{profile.store_name || 'Cafe Sighton'}</span>
+          </Link>
+          {profile.design_atmosphere && (
+            <p className="text-sm leading-relaxed max-w-xs">
+              {profile.design_atmosphere.slice(0, 100)}{profile.design_atmosphere.length > 100 ? '...' : ''}
             </p>
           )}
         </div>
 
         <div>
-          <h3 className="text-xl font-bold text-[#FDCB6E] mb-4">Information</h3>
-          <ul className="space-y-2 text-white/80 font-medium">
-            {profile.address && <li>{profile.address}</li>}
-            {profile.business_hours && <li>{profile.business_hours}</li>}
-            {profile.contact_method && <li>{profile.contact_method}</li>}
+          <h3 className="text-white font-semibold mb-6">Explore</h3>
+          <ul className="space-y-4">
+            <li><Link href="/" className="hover:text-[#D47A55] transition-colors">Home</Link></li>
+            <li><Link href="/menu" className="hover:text-[#D47A55] transition-colors">Menu</Link></li>
           </ul>
         </div>
 
-        <div className="flex flex-col items-center md:items-end">
-          <h3 className="text-xl font-bold text-[#FDCB6E] mb-4">Follow Us</h3>
-          <div className="flex gap-4">
+        <div>
+          <h3 className="text-white font-semibold mb-6">Connect</h3>
+          <div className="flex gap-4 mb-6">
             {profile.instagram_id && (
-              <a href={`https://instagram.com/${profile.instagram_id}`} target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-white/10 hover:bg-[#FF6B81] transition-colors">
-                <Instagram size={24} />
+              <a href={`https://instagram.com/${profile.instagram_id}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-[#D47A55] hover:text-white transition-all">
+                <Instagram className="w-5 h-5" />
               </a>
             )}
             {profile.x_id && (
-              <a href={`https://x.com/${profile.x_id}`} target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-white/10 hover:bg-[#FF6B81] transition-colors">
-                <Twitter size={24} />
+              <a href={`https://twitter.com/${profile.x_id}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-[#D47A55] hover:text-white transition-all">
+                <Twitter className="w-5 h-5" />
               </a>
             )}
             {profile.line_id && (
-              <a href={`https://line.me/R/ti/p/${profile.line_id}`} target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-white/10 hover:bg-[#FF6B81] transition-colors">
-                <MessageCircle size={24} />
+              <a href={`https://line.me/R/ti/p/@${profile.line_id}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-[#D47A55] hover:text-white transition-all">
+                <MessageCircle className="w-5 h-5" />
               </a>
             )}
           </div>
+          {profile.contact_method && (
+            <div className="text-sm">
+              <span className="block text-white/50 mb-1">Contact</span>
+              {profile.contact_method}
+            </div>
+          )}
         </div>
       </div>
-
-      <div className="text-center text-white/50 font-medium pt-8 border-t border-white/10">
-        &copy; {currentYear} {profile.store_name || 'Cafe Sighton'}. All rights reserved.
+      <div className="max-w-6xl mx-auto mt-16 pt-8 border-t border-white/10 text-center text-sm text-white/50">
+        &copy; {new Date().getFullYear()} {profile.store_name || 'Cafe Sighton'}. All rights reserved.
       </div>
     </footer>
   );
