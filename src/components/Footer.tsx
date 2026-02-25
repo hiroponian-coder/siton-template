@@ -1,1 +1,57 @@
-import Link from 'next/link'; import { Instagram, Twitter, Facebook } from 'lucide-react'; export default function Footer() { return ( <footer className="bg-[#1A1A1A] text-[#FAFAFA] pt-16 pb-8"> <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8"> <div> <h3 className="text-2xl font-bold tracking-wider mb-6 text-[#C5A880]">カフェサイトン</h3> <p className="text-sm text-gray-400 mb-6 leading-relaxed">モダンで落ち着いた空間で特別な一杯を。厳選されたコーヒー豆と自家製ペストリーをご用意してお待ちしております。</p> <div className="flex space-x-4"> <a href="#" className="text-gray-400 hover:text-[#C5A880] transition-colors"><Instagram className="w-5 h-5"/></a> <a href="#" className="text-gray-400 hover:text-[#C5A880] transition-colors"><Twitter className="w-5 h-5"/></a> <a href="#" className="text-gray-400 hover:text-[#C5A880] transition-colors"><Facebook className="w-5 h-5"/></a> </div> </div> <div> <h4 className="text-lg font-semibold mb-6">Links</h4> <ul className="space-y-3"> <li><Link href="/" className="text-gray-400 hover:text-[#C5A880] transition-colors">Home</Link></li> <li><Link href="/menu" className="text-gray-400 hover:text-[#C5A880] transition-colors">Menu</Link></li> <li><Link href="/about" className="text-gray-400 hover:text-[#C5A880] transition-colors">About</Link></li> <li><Link href="/access" className="text-gray-400 hover:text-[#C5A880] transition-colors">Access</Link></li> </ul> </div> <div> <h4 className="text-lg font-semibold mb-6">Contact</h4> <ul className="space-y-3 text-sm text-gray-400"> <li className="flex items-start"><span className="w-20 inline-block font-medium text-gray-300">Address:</span> <span>〒100-0001<br/>東京都千代田区1-1-1<br/>サイトンビル 1F</span></li> <li className="flex items-center"><span className="w-20 inline-block font-medium text-gray-300">Tel:</span> <span>03-1234-5678</span></li> <li className="flex items-center"><span className="w-20 inline-block font-medium text-gray-300">Open:</span> <span>08:00 - 20:00 (Tue Closed)</span></li> </ul> </div> </div> <div className="mt-16 pt-8 border-t border-gray-800 text-center text-sm text-gray-500"> <p>&copy; {new Date().getFullYear()} Cafe Saiton. All rights reserved.</p> </div> </div> </footer> ); }
+import { Profile } from '@/types';
+import { Instagram, Twitter, MessageCircle } from 'lucide-react';
+
+export default function Footer({ profile }: { profile: Profile }) {
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="bg-[#3E2723] text-white pt-16 pb-8 px-4 border-t-8 border-[#FDCB6E]">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
+        <div>
+          <h2 className="text-3xl font-black text-[#FF6B81] mb-4">
+            {profile.store_name || 'Cafe Sighton'}
+          </h2>
+          {profile.store_strengths && (
+            <p className="text-white/80 font-medium leading-relaxed">
+              {profile.store_strengths}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <h3 className="text-xl font-bold text-[#FDCB6E] mb-4">Information</h3>
+          <ul className="space-y-2 text-white/80 font-medium">
+            {profile.address && <li>{profile.address}</li>}
+            {profile.business_hours && <li>{profile.business_hours}</li>}
+            {profile.contact_method && <li>{profile.contact_method}</li>}
+          </ul>
+        </div>
+
+        <div className="flex flex-col items-center md:items-end">
+          <h3 className="text-xl font-bold text-[#FDCB6E] mb-4">Follow Us</h3>
+          <div className="flex gap-4">
+            {profile.instagram_id && (
+              <a href={`https://instagram.com/${profile.instagram_id}`} target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-white/10 hover:bg-[#FF6B81] transition-colors">
+                <Instagram size={24} />
+              </a>
+            )}
+            {profile.x_id && (
+              <a href={`https://x.com/${profile.x_id}`} target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-white/10 hover:bg-[#FF6B81] transition-colors">
+                <Twitter size={24} />
+              </a>
+            )}
+            {profile.line_id && (
+              <a href={`https://line.me/R/ti/p/${profile.line_id}`} target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-white/10 hover:bg-[#FF6B81] transition-colors">
+                <MessageCircle size={24} />
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="text-center text-white/50 font-medium pt-8 border-t border-white/10">
+        &copy; {currentYear} {profile.store_name || 'Cafe Sighton'}. All rights reserved.
+      </div>
+    </footer>
+  );
+}

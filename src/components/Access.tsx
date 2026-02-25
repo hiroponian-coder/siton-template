@@ -1,1 +1,81 @@
-import Link from 'next/link'; import { MapPin, Phone, Clock } from 'lucide-react'; export default function Access() { return ( <section className="py-24 bg-[#FAFAFA]"> <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div className="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row"> <div className="w-full md:w-1/2 p-12 flex flex-col justify-center"> <h2 className="text-3xl font-bold text-[#212121] mb-8">店舗情報</h2> <div className="space-y-6 mb-10"> <div className="flex items-start"> <MapPin className="w-6 h-6 text-[#D97736] mr-4 shrink-0 mt-1" /> <p className="text-[#4A4A4A]">〒100-0000<br />東京都千代田区パン町1-2-3</p> </div> <div className="flex items-center"> <Phone className="w-6 h-6 text-[#D97736] mr-4 shrink-0" /> <p className="text-[#4A4A4A]">03-0000-0000</p> </div> <div className="flex items-start"> <Clock className="w-6 h-6 text-[#D97736] mr-4 shrink-0 mt-1" /> <p className="text-[#4A4A4A]">営業時間: 07:00 - 18:00<br />定休日: 月曜日・火曜日</p> </div> </div> <Link href="/about" className="inline-block text-center px-8 py-4 bg-[#212121] text-white rounded-full font-bold hover:bg-[#4A4A4A] transition-colors w-full sm:w-auto"> アクセス詳細を見る </Link> </div> <div className="w-full md:w-1/2 h-64 md:h-auto bg-gray-200"> <img src="https://images.unsplash.com/photo-1555507036-ab1f40ce88f7?auto=format&fit=crop&q=80&w=1000" alt="Store exterior" className="w-full h-full object-cover" /> </div> </div> </div> </section> ); }
+import { Profile } from '@/types';
+import { MapPin, Clock, Info, Car, Users } from 'lucide-react';
+
+export default function Access({ profile }: { profile: Profile }) {
+  if (!profile.address && !profile.access_info && !profile.business_hours) return null;
+
+  return (
+    <section className="py-20 px-4 bg-[#FFF9F5]">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-black text-[#FF6B81] mb-4">
+            Store Info
+          </h2>
+          <div className="w-24 h-2 bg-[#FDCB6E] mx-auto rounded-full" />
+        </div>
+
+        <div className="bg-white rounded-[3rem] p-8 md:p-12 shadow-xl border-4 border-[#FDCB6E]">
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="space-y-8">
+              {profile.address && (
+                <div className="flex gap-4">
+                  <div className="mt-1 bg-[#FF6B81] text-white p-3 rounded-xl h-fit">
+                    <MapPin size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-black text-[#3E2723] text-lg mb-1">住所</h3>
+                    <p className="text-[#3E2723] font-medium">{profile.address}</p>
+                    {profile.access_info && (
+                      <p className="text-sm text-[#3E2723]/70 mt-1">{profile.access_info}</p>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {profile.business_hours && (
+                <div className="flex gap-4">
+                  <div className="mt-1 bg-[#FF6B81] text-white p-3 rounded-xl h-fit">
+                    <Clock size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-black text-[#3E2723] text-lg mb-1">営業時間</h3>
+                    <p className="text-[#3E2723] font-medium whitespace-pre-wrap">{profile.business_hours}</p>
+                  </div>
+                </div>
+              )}
+
+              {(profile.seats_count || profile.parking_info) && (
+                <div className="flex gap-4">
+                  <div className="mt-1 bg-[#FF6B81] text-white p-3 rounded-xl h-fit">
+                    <Info size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-black text-[#3E2723] text-lg mb-1">設備</h3>
+                    {profile.seats_count && (
+                      <p className="text-[#3E2723] font-medium flex items-center gap-2 mb-1">
+                        <Users size={16} className="text-[#FDCB6E]"/> {profile.seats_count}
+                      </p>
+                    )}
+                    {profile.parking_info && (
+                      <p className="text-[#3E2723] font-medium flex items-center gap-2">
+                        <Car size={16} className="text-[#FDCB6E]"/> {profile.parking_info}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="w-full h-[300px] md:h-full bg-[#FFF9F5] rounded-3xl border-4 border-[#FF6B81] overflow-hidden flex items-center justify-center relative">
+              <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#FF6B81 2px, transparent 2px)', backgroundSize: '20px 20px' }} />
+              <div className="text-center z-10 bg-white/90 p-6 rounded-2xl shadow-lg border-2 border-[#FDCB6E]">
+                <MapPin size={48} className="text-[#FF6B81] mx-auto mb-2 animate-bounce" />
+                <p className="font-bold text-[#3E2723]">Map Info Area</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

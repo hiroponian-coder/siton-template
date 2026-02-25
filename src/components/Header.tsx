@@ -1,1 +1,32 @@
-"use client"; import React, { useState, useEffect } from 'react'; import Link from 'next/link'; import { Menu, X, Coffee } from 'lucide-react'; export default function Header() { const [isOpen, setIsOpen] = useState(false); const [scrolled, setScrolled] = useState(false); useEffect(() => { const handleScroll = () => { setScrolled(window.scrollY > 20); }; window.addEventListener('scroll', handleScroll); return () => window.removeEventListener('scroll', handleScroll); }, []); const navLinks = [ { name: 'Home', href: '/' }, { name: 'Menu', href: '/menu' }, { name: 'About', href: '/about' }, { name: 'Access', href: '/access' }, ]; return ( <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#FAFAFA]/95 backdrop-blur-sm shadow-sm py-3' : 'bg-[#FAFAFA] py-5'}`}> <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div className="flex justify-between items-center"> <Link href="/" className="flex items-center gap-2 group"> <Coffee className="w-8 h-8 text-[#C5A880] group-hover:text-[#1A1A1A] transition-colors" /> <span className="text-[#1A1A1A] text-xl font-bold tracking-wider">カフェサイトン</span> </Link> <nav className="hidden md:flex gap-8"> {navLinks.map((link) => ( <Link key={link.name} href={link.href} className="text-[#333333] hover:text-[#C5A880] transition-colors font-medium text-sm uppercase tracking-widest"> {link.name} </Link> ))} </nav> <button className="md:hidden text-[#1A1A1A]" onClick={() => setIsOpen(!isOpen)}> {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />} </button> </div> </div> {isOpen && ( <div className="md:hidden absolute top-full left-0 w-full bg-[#FAFAFA] shadow-lg border-t border-gray-100"> <nav className="flex flex-col py-4 px-4 gap-4"> {navLinks.map((link) => ( <Link key={link.name} href={link.href} className="text-[#333333] hover:text-[#C5A880] font-medium text-lg" onClick={() => setIsOpen(false)}> {link.name} </Link> ))} </nav> </div> )} </header> ); }
+import { Profile } from '@/types';
+import { Instagram, Twitter, MessageCircle } from 'lucide-react';
+
+export default function Header({ profile }: { profile: Profile }) {
+  return (
+    <header className="sticky top-0 z-50 bg-[#FFF9F5]/90 backdrop-blur-md border-b-4 border-[#FF6B81]">
+      <div className="container mx-auto px-4 h-20 flex items-center justify-between">
+        <div className="text-2xl font-black tracking-tighter text-[#FF6B81]">
+          {profile.store_name || 'Cafe Sighton'}
+        </div>
+        
+        <div className="flex items-center gap-4">
+          {profile.instagram_id && (
+            <a href={`https://instagram.com/${profile.instagram_id}`} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-[#FF6B81] text-white hover:bg-[#FDCB6E] transition-colors shadow-sm">
+              <Instagram size={20} />
+            </a>
+          )}
+          {profile.x_id && (
+            <a href={`https://x.com/${profile.x_id}`} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-[#FF6B81] text-white hover:bg-[#FDCB6E] transition-colors shadow-sm">
+              <Twitter size={20} />
+            </a>
+          )}
+          {profile.line_id && (
+            <a href={`https://line.me/R/ti/p/${profile.line_id}`} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-[#FF6B81] text-white hover:bg-[#FDCB6E] transition-colors shadow-sm">
+              <MessageCircle size={20} />
+            </a>
+          )}
+        </div>
+      </div>
+    </header>
+  );
+}
