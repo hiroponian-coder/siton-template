@@ -1,22 +1,14 @@
 import React from 'react';
-import { supabase } from '@/lib/supabase';
-import { MapPin, Clock, Phone, Link as LinkIcon, Instagram, MessageCircle, Twitter } from 'lucide-react';
+import { getStoreProfile } from '@/lib/supabase';
+import { MapPin, Clock, Phone, Instagram, MessageCircle, Twitter } from 'lucide-react';
 
 export default async function StoreInfo() {
     const siteId = process.env.NEXT_PUBLIC_SITE_ID;
     if (!siteId) return null;
 
-    // sitesテーブルからプロフィールを含めて取得
-    const { data: site } = await supabase
-        .from('sites')
-        .select('*, profiles(*)')
-        .eq('id', siteId)
-        .single();
-
-    const profile = site?.profiles;
+    const profile = await getStoreProfile(siteId);
     if (!profile) return null;
 
-    // 少なくとも1つの表示項目があるか確認
     const hasContactInfo = profile.address || profile.business_hours || profile.contact_method;
     const hasSns = profile.instagram_id || profile.line_id || profile.x_id;
 
@@ -25,7 +17,6 @@ export default async function StoreInfo() {
     return (
         <div className="w-full max-w-4xl mx-auto my-12 p-8 bg-white border border-gray-100 rounded-2xl shadow-sm">
             <h2 className="text-2xl font-bold mb-6 text-gray-900 border-b border-gray-100 pb-3">店舗情報 / アクセス</h2>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-4 text-gray-700">
                     {profile.address && (
@@ -38,7 +29,6 @@ export default async function StoreInfo() {
                             </div>
                         </div>
                     )}
-
                     {profile.business_hours && (
                         <div className="flex items-start gap-3">
                             <Clock className="h-5 w-5 text-gray-400 mt-0.5 shrink-0" />
@@ -48,7 +38,6 @@ export default async function StoreInfo() {
                             </div>
                         </div>
                     )}
-
                     {profile.contact_method && (
                         <div className="flex items-start gap-3">
                             <Phone className="h-5 w-5 text-gray-400 mt-0.5 shrink-0" />
@@ -56,10 +45,9 @@ export default async function StoreInfo() {
                         </div>
                     )}
                 </div>
-
                 <div className="space-y-4">
                     {profile.address && (
-                        <div className="w-full h-48 md:h-full min-h-[200px] rounded-xl overflow-hidden border border-gray-100 shadow-sm relative">
+                        <div className="w-full h-48 rounded-xl overflow-hidden border border-gray-100 shadow-sm relative">
                             <iframe
                                 width="100%"
                                 height="100%"
@@ -67,12 +55,11 @@ export default async function StoreInfo() {
                                 loading="lazy"
                                 allowFullScreen
                                 referrerPolicy="no-referrer-when-downgrade"
-                                src={`https://maps.google.com/maps?q=${encodeURIComponent(`${profile.address} ${profile.store_name || site.store_name}`)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                                src={`https://maps.google.com/maps?q=${encodeURIComponent(`${profile.address} ${profile.store_name || ''}`)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
                                 className="absolute inset-0 w-full h-full"
                             ></iframe>
                         </div>
                     )}
-
                     {hasSns && (
                         <div>
                             <h3 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wider">SNS / リンク</h3>
@@ -98,7 +85,6 @@ export default async function StoreInfo() {
                             </div>
                         </div>
                     )}
-
                     {profile.coupon_info && (
                         <div className="mt-6 p-4 bg-orange-50 border border-orange-100 rounded-xl">
                             <h3 className="text-xs font-bold text-orange-800 mb-1 uppercase tracking-wider">クーポン・特典</h3>
