@@ -15,6 +15,7 @@ export async function middleware(req: NextRequest) {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ p_site_id: siteId }),
+                cache: 'no-store',
             }
         )
         const data = await res.json()
