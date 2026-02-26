@@ -33,7 +33,7 @@ jobs:
             echo "Attempt $ATTEMPT/$MAX_ATTEMPTS..."
 
             RESPONSE=$(curl -sf \
-              "https://api.vercel.com/v6/deployments?projectId=${VERCEL_REPO_NAME}&teamId=${VERCEL_SCOPE}&limit=20" \
+              "https://api.vercel.com/v6/deployments?projectId=${VERCEL_REPO_NAME}&limit=20" \
               -H "Authorization: Bearer ${VERCEL_ACCESS_TOKEN}" \
               2>/dev/null) || true
 
