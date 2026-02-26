@@ -6,16 +6,19 @@ export async function middleware(req: NextRequest) {
 
     try {
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/sites?id=eq.${siteId}&select=is_blocked,is_published`,
+            `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/rpc/get_site_status`,
             {
+                method: 'POST',
                 headers: {
                     'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
                     'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+                    'Content-Type': 'application/json',
                 },
+                body: JSON.stringify({ p_site_id: siteId }),
             }
         )
         const data = await res.json()
-        const status = data[0]
+        const status = Array.isArray(data) ? data[0] : data
 
         if (status?.is_blocked) {
             return NextResponse.rewrite(new URL('/blocked', req.url))
