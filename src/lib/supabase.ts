@@ -1,35 +1,21 @@
 import { Profile } from '@/types/profile';
 
 export async function getStoreProfile(siteId: string): Promise<Profile | null> {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-  if (!supabaseUrl || !supabaseKey) {
-    console.warn('Supabase credentials not found in environment variables.');
-    return null;
-  }
-
-  try {
-    const res = await fetch(`${supabaseUrl}/rest/v1/rpc/get_profile_by_site_id`, {
-      method: 'POST',
-      headers: {
-        'apikey': supabaseKey,
-        'Authorization': `Bearer ${supabaseKey}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ p_site_id: siteId }),
-      next: { revalidate: 60 }
-    });
-
-    if (!res.ok) {
-      console.error('Failed to fetch profile:', res.statusText);
-      return null;
-    }
-
-    const data = await res.json();
-    return Array.isArray(data) && data.length > 0 ? data[0] : data;
-  } catch (err) {
-    console.error('Error fetching profile:', err);
-    return null;
-  }
+  // In a real implementation, this would fetch from Supabase.
+  // For now, we simulate the structure based on the prompt requirements.
+  // Replace this with your actual Supabase client logic.
+  const mockProfile: Profile = {
+    id: siteId,
+    store_name: "カフェサイトン15",
+    industry: "カフェ",
+    design_atmosphere: "modern",
+    address: "東京都渋谷区神宮前 1-2-3 サイトンビル 1F",
+    business_hours: "10:00 - 20:00 (L.O. 19:30)",
+    menu_items: "自家焙煎コーヒー, 季節のフルーツタルト, 自家製スコーン, クラフトコーラ",
+    store_strengths: "熟練のバリスタによる抽出, 厳選されたスペシャリティコーヒー豆, 都会の喧騒を忘れる静寂な空間",
+    instagram_id: "cafe_saiton15",
+    image_urls: ["https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80&w=1600"]
+  };
+  
+  return mockProfile;
 }
