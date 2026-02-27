@@ -10,12 +10,14 @@ export async function getStoreProfile(siteId: string): Promise<Profile | null> {
   }
 
   try {
-    const res = await fetch(`${supabaseUrl}/rest/v1/profiles?id=eq.${siteId}&select=*`, {
+    const res = await fetch(`${supabaseUrl}/rest/v1/rpc/get_profile_by_site_id`, {
+      method: 'POST',
       headers: {
         'apikey': supabaseKey,
         'Authorization': `Bearer ${supabaseKey}`,
         'Content-Type': 'application/json'
       },
+      body: JSON.stringify({ p_site_id: siteId }),
       next: { revalidate: 60 }
     });
 
@@ -25,7 +27,7 @@ export async function getStoreProfile(siteId: string): Promise<Profile | null> {
     }
 
     const data = await res.json();
-    return data && data.length > 0 ? data[0] : null;
+    return Array.isArray(data) && data.length > 0 ? data[0] : data;
   } catch (err) {
     console.error('Error fetching profile:', err);
     return null;
