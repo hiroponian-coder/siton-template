@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function middleware(req: NextRequest) {
     const siteId = process.env.NEXT_PUBLIC_SITE_ID
-    if (!siteId) return NextResponse.next()
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    if (!siteId || !supabaseUrl || !anonKey) return NextResponse.next()
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
     const baseUrl = supabaseUrl.replace(/\/+$/, '')
 
     try {
@@ -13,8 +14,8 @@ export async function middleware(req: NextRequest) {
             {
                 method: 'POST',
                 headers: {
-                    'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
-                    'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+                    'apikey': anonKey,
+                    'Authorization': `Bearer ${anonKey}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ p_site_id: siteId }),
