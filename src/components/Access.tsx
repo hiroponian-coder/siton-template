@@ -1,77 +1,57 @@
-import { Profile } from '@/types';
-import { MapPin, Clock, Info, Car, Users } from 'lucide-react';
+import { Profile } from '@/types/profile';
+import { MapPin, Clock, Phone, Share2 } from 'lucide-react';
 
 export default function Access({ profile }: { profile: Profile }) {
-  if (!profile.address && !profile.access_info && !profile.business_hours) return null;
-
   return (
-    <section className="py-20 px-4 bg-[#FFF9F5]">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-black text-[#FF6B81] mb-4">
-            Store Info
-          </h2>
-          <div className="w-24 h-2 bg-[#FDCB6E] mx-auto rounded-full" />
-        </div>
+    <section className="py-24 bg-[#F9FAFB]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-16">
+          <div className="space-y-12">
+            <div>
+              <h2 className="text-3xl font-bold text-[#111827] mb-8">Visit Us</h2>
+              <p className="text-[#4B5563] leading-relaxed mb-8">
+                都会の喧騒から離れた隠れ家的な空間。{profile.store_name}で、心ゆくまでリラックスした時間をお過ごしください。
+              </p>
+            </div>
 
-        <div className="bg-white rounded-[3rem] p-8 md:p-12 shadow-xl border-4 border-[#FDCB6E]">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="space-y-8">
+            <div className="space-y-6">
               {profile.address && (
-                <div className="flex gap-4">
-                  <div className="mt-1 bg-[#FF6B81] text-white p-3 rounded-xl h-fit">
-                    <MapPin size={24} />
-                  </div>
+                <div className="flex items-start">
+                  <MapPin className="text-[#C2410C] mr-4 flex-shrink-0" size={24} />
                   <div>
-                    <h3 className="font-black text-[#3E2723] text-lg mb-1">住所</h3>
-                    <p className="text-[#3E2723] font-medium">{profile.address}</p>
-                    {profile.access_info && (
-                      <p className="text-sm text-[#3E2723]/70 mt-1">{profile.access_info}</p>
-                    )}
+                    <p className="font-bold text-[#111827]">ADDRESS</p>
+                    <p className="text-[#4B5563]">{profile.address}</p>
                   </div>
                 </div>
               )}
-
+              
               {profile.business_hours && (
-                <div className="flex gap-4">
-                  <div className="mt-1 bg-[#FF6B81] text-white p-3 rounded-xl h-fit">
-                    <Clock size={24} />
-                  </div>
+                <div className="flex items-start">
+                  <Clock className="text-[#C2410C] mr-4 flex-shrink-0" size={24} />
                   <div>
-                    <h3 className="font-black text-[#3E2723] text-lg mb-1">営業時間</h3>
-                    <p className="text-[#3E2723] font-medium whitespace-pre-wrap">{profile.business_hours}</p>
+                    <p className="font-bold text-[#111827]">OPENING HOURS</p>
+                    <p className="text-[#4B5563]">{profile.business_hours}</p>
                   </div>
                 </div>
               )}
 
-              {(profile.seats_count || profile.parking_info) && (
-                <div className="flex gap-4">
-                  <div className="mt-1 bg-[#FF6B81] text-white p-3 rounded-xl h-fit">
-                    <Info size={24} />
-                  </div>
+              {profile.contact_method && (
+                <div className="flex items-start">
+                  <Phone className="text-[#C2410C] mr-4 flex-shrink-0" size={24} />
                   <div>
-                    <h3 className="font-black text-[#3E2723] text-lg mb-1">設備</h3>
-                    {profile.seats_count && (
-                      <p className="text-[#3E2723] font-medium flex items-center gap-2 mb-1">
-                        <Users size={16} className="text-[#FDCB6E]"/> {profile.seats_count}
-                      </p>
-                    )}
-                    {profile.parking_info && (
-                      <p className="text-[#3E2723] font-medium flex items-center gap-2">
-                        <Car size={16} className="text-[#FDCB6E]"/> {profile.parking_info}
-                      </p>
-                    )}
+                    <p className="font-bold text-[#111827]">CONTACT</p>
+                    <p className="text-[#4B5563]">{profile.contact_method}</p>
                   </div>
                 </div>
               )}
             </div>
+          </div>
 
-            <div className="w-full h-[300px] md:h-full bg-[#FFF9F5] rounded-3xl border-4 border-[#FF6B81] overflow-hidden flex items-center justify-center relative">
-              <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#FF6B81 2px, transparent 2px)', backgroundSize: '20px 20px' }} />
-              <div className="text-center z-10 bg-white/90 p-6 rounded-2xl shadow-lg border-2 border-[#FDCB6E]">
-                <MapPin size={48} className="text-[#FF6B81] mx-auto mb-2 animate-bounce" />
-                <p className="font-bold text-[#3E2723]">Map Info Area</p>
-              </div>
+          <div className="bg-gray-200 min-h-[400px] rounded-lg overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+            {/* Google Map Mockup */}
+            <div className="w-full h-full flex items-center justify-center flex-col text-[#4B5563]">
+              <MapPin size={48} className="mb-4 opacity-30" />
+              <p className="text-sm uppercase tracking-widest">Interactive Map View</p>
             </div>
           </div>
         </div>
