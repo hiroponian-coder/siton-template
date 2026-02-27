@@ -1,35 +1,27 @@
 import { getStoreProfile } from '@/lib/supabase';
 import Header from '@/components/Header';
-import Hero from '@/components/Hero';
-import ConceptSection from '@/components/ConceptSection';
-import FeaturedMenu from '@/components/FeaturedMenu';
-import FeatureSection from '@/components/FeatureSection';
-import CallToAction from '@/components/CallToAction';
-import ShopInfo from '@/components/ShopInfo';
+import HeroWithCta from '@/components/HeroWithCta';
+import ConceptGrid from '@/components/ConceptGrid';
+import DynamicFeaturedMenu from '@/components/DynamicFeaturedMenu';
+import StoreProfileSection from '@/components/StoreProfileSection';
+import SnsIntegrationBanner from '@/components/SnsIntegrationBanner';
 import Footer from '@/components/Footer';
 
 export default async function Home() {
-  const siteId = process.env.NEXT_PUBLIC_SITE_ID;
-  const profile = siteId ? await getStoreProfile(siteId) : null;
-  
-  if (!profile) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-[#2C1E16] bg-[#FDFBF7]">
-        <p className="text-xl">Site not found or profile missing.</p>
-      </div>
-    );
-  }
+  const siteId = process.env.NEXT_PUBLIC_SITE_ID || "seiton13-demo";
+  const profile = await getStoreProfile(siteId);
+
+  if (!profile) return <div className="flex items-center justify-center min-h-screen">Site not found.</div>;
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header profile={profile} />
       <main className="flex-grow">
-        <Hero profile={profile} />
-        <ConceptSection profile={profile} />
-        <FeaturedMenu profile={profile} />
-        <FeatureSection profile={profile} />
-        <CallToAction profile={profile} />
-        <ShopInfo profile={profile} />
+        <HeroWithCta profile={profile} />
+        <ConceptGrid profile={profile} />
+        <DynamicFeaturedMenu profile={profile} />
+        <StoreProfileSection profile={profile} />
+        <SnsIntegrationBanner profile={profile} />
       </main>
       <Footer profile={profile} />
     </div>
