@@ -2,14 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function middleware(req: NextRequest) {
     const siteId = process.env.NEXT_PUBLIC_SITE_ID
-    if (!siteId) {
-        const res = NextResponse.next()
-        res.headers.set('x-mw-debug', 'no-site-id')
-        return res
-    }
+    if (!siteId) return NextResponse.next()
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-    // 末尾スラッシュを正規化
     const baseUrl = supabaseUrl.replace(/\/+$/, '')
 
     try {
@@ -27,44 +22,27 @@ export async function middleware(req: NextRequest) {
             }
         )
 
-        if (!res.ok) {
-            const errBody = await res.text().catch(() => 'no-body')
-            const resp = NextResponse.next()
-            resp.headers.set('x-mw-debug', `rpc-error-${res.status}`)
-            resp.headers.set('x-mw-url', `${baseUrl}/rest/v1/rpc/get_site_status`)
-            resp.headers.set('x-mw-err', errBody.slice(0, 200))
-            return resp
-        }
+        if (!res.ok) return NextResponse.next()
 
         const data = await res.json()
         const status = Array.isArray(data) ? data[0] : data
 
         if (!status || typeof status.is_published === 'undefined') {
-            const resp = NextResponse.next()
-            resp.headers.set('x-mw-debug', `no-data:${JSON.stringify(data).slice(0, 100)}`)
-            return resp
+            return NextResponse.next()
         }
 
         if (status.is_blocked) {
-            const resp = NextResponse.rewrite(new URL('/blocked', req.url))
-            resp.headers.set('x-mw-debug', 'blocked')
-            return resp
+            return NextResponse.rewrite(new URL('/blocked', req.url))
         }
 
         if (!status.is_published) {
-            const resp = NextResponse.rewrite(new URL('/coming-soon', req.url))
-            resp.headers.set('x-mw-debug', 'unpublished')
-            return resp
+            return NextResponse.rewrite(new URL('/coming-soon', req.url))
         }
-
-        const resp = NextResponse.next()
-        resp.headers.set('x-mw-debug', 'published')
-        return resp
-    } catch (e: any) {
-        const resp = NextResponse.next()
-        resp.headers.set('x-mw-debug', `catch:${e?.message?.slice(0, 80) || 'unknown'}`)
-        return resp
+    } catch {
+        // エラー時はそのまま通す（フェイルオープン）
     }
+
+    return NextResponse.next()
 }
 
 export const config = {
