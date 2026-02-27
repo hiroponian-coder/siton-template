@@ -1,31 +1,33 @@
 import { getStoreProfile } from '@/lib/supabase';
 import Header from '@/components/Header';
-import PageHeader from '@/components/PageHeader';
-import MenuList from '@/components/MenuList';
-import CallToAction from '@/components/CallToAction';
+import MenuSection from '@/components/MenuSection';
 import Footer from '@/components/Footer';
 
-export default async function Menu() {
+export default async function MenuPage() {
   const siteId = process.env.NEXT_PUBLIC_SITE_ID;
   const profile = siteId ? await getStoreProfile(siteId) : null;
-  
-  if (!profile) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-[#2C1E16] bg-[#FDFBF7]">
-        <p className="text-xl">Site not found or profile missing.</p>
-      </div>
-    );
+
+  if (!profile || !profile.menu_items) {
+    return <div className="py-20 text-center">Menu not available.</div>;
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <main className="pt-20 bg-[#1A1A1A]">
       <Header profile={profile} />
-      <main className="flex-grow">
-        <PageHeader title="Menu" subtitle="こだわりの自家製メニュー" />
-        <MenuList profile={profile} />
-        <CallToAction profile={profile} />
-      </main>
+      <div className="py-12 bg-[#FDFDFD]">
+        <div className="max-w-7xl mx-auto px-6">
+           <h1 className="text-5xl font-bold text-[#1A1A1A] mb-4 uppercase tracking-tighter">Menu List</h1>
+           <p className="text-[#2D2D2D]/60">Our current offerings and seasonal selections.</p>
+        </div>
+      </div>
+      <MenuSection profile={profile} />
+      {profile.coupon_info && (
+        <section className="py-12 bg-[#C5A059] text-[#1A1A1A] text-center">
+          <h2 className="text-2xl font-black italic">Special Offer</h2>
+          <p className="mt-2 font-medium">{profile.coupon_info}</p>
+        </section>
+      )}
       <Footer profile={profile} />
-    </div>
+    </main>
   );
 }
