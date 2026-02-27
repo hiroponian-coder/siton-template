@@ -28,8 +28,11 @@ export async function middleware(req: NextRequest) {
         )
 
         if (!res.ok) {
+            const errBody = await res.text().catch(() => 'no-body')
             const resp = NextResponse.next()
             resp.headers.set('x-mw-debug', `rpc-error-${res.status}`)
+            resp.headers.set('x-mw-url', `${baseUrl}/rest/v1/rpc/get_site_status`)
+            resp.headers.set('x-mw-err', errBody.slice(0, 200))
             return resp
         }
 
