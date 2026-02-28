@@ -19,5 +19,5 @@ export interface Profile {
   line_id?: string | null;
   x_id?: string | null;
   coupon_info?: string | null;
-  image_urls?: any[] | null;
+  image_urls?: string[] | null;
 }
