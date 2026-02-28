@@ -1,48 +1,43 @@
-import { Profile } from '@/types';
-import { UtensilsCrossed } from 'lucide-react';
+import { Profile } from '@/types/profile';
 
 export default function MenuSection({ profile }: { profile: Profile }) {
   if (!profile.menu_items) return null;
 
-  const menuList = profile.menu_items.split(',').map(item => item.trim()).filter(Boolean);
+  let items = [];
+  try {
+    items = JSON.parse(profile.menu_items);
+  } catch (e) {
+    return null;
+  }
 
   return (
-    <section className="py-20 px-4 bg-[#FDCB6E] relative overflow-hidden">
-      <div className="absolute top-10 left-10 text-white/30 rotate-12">
-        <UtensilsCrossed size={120} />
-      </div>
-      <div className="absolute bottom-10 right-10 text-white/30 -rotate-12">
-        <UtensilsCrossed size={120} />
-      </div>
-
-      <div className="max-w-4xl mx-auto relative z-10">
+    <section id="menu" className="py-24 bg-[#1A1A1A] text-white">
+      <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-black text-[#3E2723] mb-4">
-            Cafe Menu
-          </h2>
-          <div className="w-24 h-2 bg-[#FF6B81] mx-auto rounded-full" />
+          <h2 className="text-3xl md:text-5xl font-serif italic text-[#C5A059] mb-4">Signature Menu</h2>
+          <div className="h-px w-20 bg-[#C5A059] mx-auto" />
         </div>
 
-        <div className="bg-white/90 backdrop-blur-md rounded-[3rem] p-8 md:p-12 shadow-2xl border-4 border-white">
-          <div className="grid md:grid-cols-2 gap-6">
-            {menuList.map((menu, idx) => (
-              <div key={idx} className="flex items-center gap-4 bg-[#FFF9F5] p-4 rounded-2xl border-2 border-[#FF6B81] hover:-translate-y-1 transition-transform">
-                <div className="w-12 h-12 rounded-full bg-[#FF6B81] text-white flex items-center justify-center font-black text-xl shrink-0 shadow-inner">
-                  {idx + 1}
-                </div>
-                <span className="text-[#3E2723] font-bold text-lg">{menu}</span>
+        <div className="grid gap-8">
+          {items.map((item: any, idx: number) => (
+            <div key={idx} className="flex items-end group">
+              <div className="flex-shrink-0">
+                <span className="text-sm text-[#C5A059] font-mono mb-1 block uppercase">{item.category}</span>
+                <h3 className="text-xl font-medium tracking-wide group-hover:text-[#C5A059] transition-colors">{item.name}</h3>
               </div>
-            ))}
-          </div>
-
-          {profile.price_range && (
-            <div className="mt-12 text-center">
-              <div className="inline-block bg-[#3E2723] text-white px-8 py-3 rounded-full font-bold shadow-lg">
-                <span className="text-[#FDCB6E] mr-2">Price Range:</span> {profile.price_range}
+              <div className="flex-grow border-b border-white/10 mx-4 mb-1 border-dotted" />
+              <div className="text-xl font-light">
+                {item.price}
               </div>
             </div>
-          )}
+          ))}
         </div>
+
+        {profile.price_range && (
+          <div className="mt-16 text-center text-sm text-white/40">
+            Estimated Price Range: {profile.price_range}
+          </div>
+        )}
       </div>
     </section>
   );
