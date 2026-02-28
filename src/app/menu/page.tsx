@@ -1,31 +1,38 @@
 import { getStoreProfile } from '@/lib/supabase';
+import { Profile } from '@/types/profile';
 import Header from '@/components/Header';
-import PageHeader from '@/components/PageHeader';
-import MenuList from '@/components/MenuList';
-import CallToAction from '@/components/CallToAction';
 import Footer from '@/components/Footer';
 
-export default async function Menu() {
+const MOCK_PROFILE: Profile = {
+  store_name: 'カフェサイトン',
+  menu_items: 'Single Origin Espresso - ¥650\nSaiton Seasonal Blend - ¥700\nArtisanal Pastry Platter - ¥1,200\nSeasonal Fruit Galette - ¥950\nHand Drip Coffee - ¥750\nOrganic Ceylon Tea - ¥700',
+  instagram_id: 'cafe_saiton_demo'
+};
+
+export default async function MenuPage() {
   const siteId = process.env.NEXT_PUBLIC_SITE_ID;
-  const profile = siteId ? await getStoreProfile(siteId) : null;
-  
-  if (!profile) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-[#2C1E16] bg-[#FDFBF7]">
-        <p className="text-xl">Site not found or profile missing.</p>
-      </div>
-    );
-  }
+  const profileFromDb = siteId ? await getStoreProfile(siteId) : null;
+  const profile = profileFromDb || MOCK_PROFILE;
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <main className="bg-[#FAFAFA]">
       <Header profile={profile} />
-      <main className="flex-grow">
-        <PageHeader title="Menu" subtitle="こだわりの自家製メニュー" />
-        <MenuList profile={profile} />
-        <CallToAction profile={profile} />
-      </main>
+      <section className="pt-32 pb-24 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl md:text-6xl font-serif font-bold text-center mb-16">Our Menu</h1>
+          <div className="bg-white p-8 md:p-16 shadow-sm border border-gray-100">
+            <div className="grid grid-cols-1 gap-12">
+              <div>
+                <h2 className="text-[#C5A059] text-sm font-bold tracking-widest border-b border-[#C5A059] pb-4 mb-8 uppercase">Selections</h2>
+                <div className="whitespace-pre-wrap leading-loose text-lg font-serif">
+                  {profile.menu_items || '現在準備中です。'}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <Footer profile={profile} />
-    </div>
+    </main>
   );
 }
