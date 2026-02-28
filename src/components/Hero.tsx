@@ -1,37 +1,34 @@
 import { Profile } from '@/types/profile';
-import { Coffee } from 'lucide-react';
+import { ArrowRight, Link as LinkIcon } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Hero({ profile }: { profile: Profile }) {
-  const imageUrl = profile.image_urls?.[0];
+  const heroImage = profile.image_urls?.[0] || 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=2000';
 
   return (
-    <section className="relative w-full h-[80vh] min-h-[500px] flex items-center justify-center overflow-hidden bg-[#4A332D]">
-      {imageUrl ? (
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-overlay"
-          style={{ backgroundImage: `url(${imageUrl})` }}
-        />
-      ) : (
-        <div className="absolute inset-0 opacity-20 flex items-center justify-center">
-          <Coffee className="w-96 h-96 text-[#FDFBF7]" />
+    <section className="relative flex min-h-[85vh] items-center overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <img src={heroImage} alt={profile.store_name || 'Cafe'} className="h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
+      <div className="container relative z-10 mx-auto px-6 py-24 text-white">
+        <div className="max-w-2xl">
+          <h1 className="mb-6 text-5xl font-bold leading-tight md:text-7xl">
+            洗練された空間で<br />味わう至福の一杯
+          </h1>
+          <p className="mb-10 text-lg leading-relaxed text-gray-100 md:text-xl">
+            都会の喧騒を忘れ、モダンなインテリアに囲まれながら、{profile.store_name}自慢の厳選された豆を使用したコーヒーと季節のスイーツを。 
+          </p>
+          <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-6 sm:space-y-0">
+            <Link href="/menu" className="inline-flex items-center justify-center bg-[#e17055] px-8 py-4 text-sm font-bold tracking-widest text-white transition-all hover:bg-[#d35400]">
+              MENU LIST <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+            <Link href="/about" className="inline-flex items-center justify-center border-2 border-white bg-transparent px-8 py-4 text-sm font-bold tracking-widest text-white transition-all hover:bg-white hover:text-[#2d3436]">
+              OUR STORY
+            </Link>
+          </div>
         </div>
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#2C1E16]/90 to-transparent" />
-      
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto text-[#FDFBF7]">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-wider drop-shadow-lg">
-          {profile.store_name || 'Cafe Sighton'}
-        </h1>
-        {profile.design_atmosphere && (
-          <p className="text-xl md:text-2xl font-light mb-8 italic text-[#FDFBF7]/90 drop-shadow-md">
-            {profile.design_atmosphere}
-          </p>
-        )}
-        {profile.store_strengths && (
-          <p className="text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto bg-black/20 p-6 rounded-2xl backdrop-blur-sm">
-            {profile.store_strengths}
-          </p>
-        )}
       </div>
     </section>
   );

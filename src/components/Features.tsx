@@ -1,73 +1,31 @@
-import { Profile } from '@/types';
-import { Heart, Sparkles, Coffee, CakeSlice } from 'lucide-react';
+import { Profile } from '@/types/profile';
+import { Coffee, MapPin, Star, Users } from 'lucide-react';
 
 export default function Features({ profile }: { profile: Profile }) {
-  if (!profile.store_strengths && !profile.design_atmosphere) return null;
+  const strengths = profile.store_strengths ? profile.store_strengths.split('\n') : ['こだわり抜いた豆', '落ち着くモダン空間', '至福の自家製スイーツ'];
+
+  const icons = [<Coffee key="1" className="h-8 w-8" />, <Star key="2" className="h-8 w-8" />, <Users key="3" className="h-8 w-8" />];
 
   return (
-    <section className="py-20 px-4 bg-[#FFF9F5]">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-black text-[#FF6B81] mb-4 inline-block relative">
-            Our Concept
-            <span className="absolute -top-4 -right-8 text-[#FDCB6E]">
-              <Sparkles size={32} />
-            </span>
-          </h2>
-          <div className="w-24 h-2 bg-[#FDCB6E] mx-auto rounded-full" />
+    <section className="bg-[#f9f9f9] py-24">
+      <div className="container mx-auto px-6">
+        <div className="mb-16 text-center">
+          <h2 className="mb-4 text-sm font-bold tracking-[0.3em] text-[#e17055]">FEATURES</h2>
+          <h3 className="text-3xl font-bold text-[#2d3436] md:text-4xl">当店のこだわり</h3>
         </div>
-
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div className="bg-white p-8 md:p-12 rounded-[3rem] shadow-xl border-4 border-[#FF6B81] relative">
-            <div className="absolute -top-6 -left-6 bg-[#FDCB6E] p-4 rounded-full text-white shadow-lg rotate-[-10deg]">
-              <Heart size={32} />
+        
+        <div className="grid gap-12 md:grid-cols-3">
+          {strengths.map((strength, i) => (
+            <div key={i} className="flex flex-col items-center text-center">
+              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-white text-[#e17055] shadow-xl shadow-[#2d3436]/5">
+                {icons[i % icons.length]}
+              </div>
+              <h4 className="mb-4 text-xl font-bold text-[#2d3436]">{strength}</h4>
+              <p className="text-sm leading-relaxed text-gray-500">
+                お客様の日常に寄り添う一杯のために、細部までこだわり抜いたサービスを提供いたします。
+              </p>
             </div>
-            {profile.store_strengths && (
-              <div className="mb-6">
-                <h3 className="text-xl font-bold text-[#FF6B81] mb-2 flex items-center gap-2">
-                  <CakeSlice className="inline" size={24}/> お店のこだわり
-                </h3>
-                <p className="text-[#3E2723] leading-relaxed text-lg font-medium">
-                  {profile.store_strengths}
-                </p>
-              </div>
-            )}
-            {profile.design_atmosphere && (
-              <div>
-                <h3 className="text-xl font-bold text-[#FF6B81] mb-2 flex items-center gap-2">
-                  <Coffee className="inline" size={24}/> 雰囲気
-                </h3>
-                <p className="text-[#3E2723] leading-relaxed text-lg font-medium">
-                  {profile.design_atmosphere}な空間で、特別な時間をお過ごしください。
-                </p>
-              </div>
-            )}
-          </div>
-          
-          <div className="grid grid-cols-2 gap-4">
-            {profile.image_urls && profile.image_urls.length > 1 ? (
-              profile.image_urls.slice(1, 5).map((url, idx) => (
-                <div key={idx} className={`rounded-3xl overflow-hidden shadow-lg border-4 border-[#FDCB6E] aspect-square ${idx % 2 === 0 ? 'mt-8' : '-mt-8'}`}>
-                  <img src={url} alt="Cafe Photo" className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"/>
-                </div>
-              ))
-            ) : (
-              <>
-                <div className="rounded-3xl shadow-lg border-4 border-[#FDCB6E] aspect-square mt-8 bg-[#FF6B81] flex items-center justify-center text-white">
-                  <CakeSlice size={48} />
-                </div>
-                <div className="rounded-3xl shadow-lg border-4 border-[#FF6B81] aspect-square -mt-8 bg-[#FDCB6E] flex items-center justify-center text-white">
-                  <Coffee size={48} />
-                </div>
-                <div className="rounded-3xl shadow-lg border-4 border-[#FF6B81] aspect-square mt-8 bg-[#FDCB6E] flex items-center justify-center text-white">
-                  <Heart size={48} />
-                </div>
-                <div className="rounded-3xl shadow-lg border-4 border-[#FDCB6E] aspect-square -mt-8 bg-[#FF6B81] flex items-center justify-center text-white">
-                  <Sparkles size={48} />
-                </div>
-              </>
-            )}
-          </div>
+          ))}
         </div>
       </div>
     </section>
