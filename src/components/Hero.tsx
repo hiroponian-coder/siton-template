@@ -1,37 +1,38 @@
+import { Coffee } from 'lucide-react'
 import { Profile } from '@/types/profile';
-import { Coffee } from 'lucide-react';
 
 export default function Hero({ profile }: { profile: Profile }) {
-  const imageUrl = profile.image_urls?.[0];
+  const bgImage = profile.image_urls?.[0] || 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=2000';
 
   return (
-    <section className="relative w-full h-[80vh] min-h-[500px] flex items-center justify-center overflow-hidden bg-[#4A332D]">
-      {imageUrl ? (
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-overlay"
-          style={{ backgroundImage: `url(${imageUrl})` }}
+    <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <img 
+          src={bgImage} 
+          alt="Hero Background" 
+          className="w-full h-full object-cover brightness-[0.4]"
         />
-      ) : (
-        <div className="absolute inset-0 opacity-20 flex items-center justify-center">
-          <Coffee className="w-96 h-96 text-[#FDFBF7]" />
+      </div>
+      <div className="relative z-10 text-center px-4 max-w-4xl">
+        <div className="flex justify-center mb-6">
+          <div className="p-3 rounded-full bg-[#B45309] text-white animate-bounce">
+            <Coffee size={32} />
+          </div>
         </div>
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#2C1E16]/90 to-transparent" />
-      
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto text-[#FDFBF7]">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-wider drop-shadow-lg">
-          {profile.store_name || 'Cafe Sighton'}
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+          {profile.store_name}
         </h1>
-        {profile.design_atmosphere && (
-          <p className="text-xl md:text-2xl font-light mb-8 italic text-[#FDFBF7]/90 drop-shadow-md">
-            {profile.design_atmosphere}
-          </p>
-        )}
-        {profile.store_strengths && (
-          <p className="text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto bg-black/20 p-6 rounded-2xl backdrop-blur-sm">
-            {profile.store_strengths}
-          </p>
-        )}
+        <p className="text-xl md:text-2xl text-slate-200 font-light mb-10">
+          {profile.store_strengths || '洗練された空間で、至福の一杯を。'}
+        </p>
+        <div className="flex flex-col md:flex-row gap-4 justify-center">
+          <a href="/menu" className="px-8 py-4 bg-[#B45309] text-white rounded-full font-semibold hover:bg-[#92400E] transition-all transform hover:scale-105">
+            メニューを見る
+          </a>
+          <a href="/access" className="px-8 py-4 bg-white text-[#0F172A] rounded-full font-semibold hover:bg-slate-100 transition-all transform hover:scale-105">
+            アクセス情報
+          </a>
+        </div>
       </div>
     </section>
   );
