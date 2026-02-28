@@ -1,13 +1,10 @@
-export default function PageHeader({ title, subtitle, image }: { title: string; subtitle: string; image?: string }) {
+export default function PageHeader({ title, subtitle }: { title: string, subtitle: string }) {
   return (
-    <div
-      className="relative pt-24 pb-16 px-4 text-center text-[#FDFBF7]"
-      style={image ? { backgroundImage: `url(${image})`, backgroundSize: "cover", backgroundPosition: "center" } : { backgroundColor: "#4A332D" }}
-    >
-      {image && <div className="absolute inset-0 bg-[#4A332D]/70" />}
-      <div className="relative z-10">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-wider">{title}</h1>
-        <p className="text-[#D47A55] text-lg font-medium">{subtitle}</p>
+    <div className="pt-32 pb-16 bg-white border-b border-slate-100 text-center">
+      <div className="max-w-7xl mx-auto px-4">
+        <h1 className="text-5xl font-black text-[#334155] mb-4">{title}</h1>
+        <div className="h-1 w-20 bg-[#D97706] mx-auto mb-6"></div>
+        <p className="text-slate-500 tracking-widest uppercase text-sm">{subtitle}</p>
       </div>
     </div>
   );

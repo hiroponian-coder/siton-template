@@ -1,43 +1,49 @@
+import { Coffee, Clock, Heart } from 'lucide-react'
 import { Profile } from '@/types/profile';
-import { Leaf, Heart, Coffee } from 'lucide-react';
 
 export default function ConceptSection({ profile }: { profile: Profile }) {
-  if (!profile.store_strengths && !profile.design_atmosphere) return null;
-
   return (
-    <section className="py-24 px-4 bg-[#FDFBF7]">
-      <div className="max-w-4xl mx-auto text-center">
-        <div className="flex justify-center mb-6">
-          <Coffee className="w-8 h-8 text-[#D47A55]" />
-        </div>
-        <h2 className="text-3xl font-bold mb-12 text-[#4A332D]">Concept</h2>
-        
-        <div className="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-[#4A332D]/5 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#D47A55] to-[#4A332D]" />
-          
-          {profile.design_atmosphere && (
-            <div className="mb-10">
-              <h3 className="flex items-center justify-center gap-2 text-xl font-semibold text-[#4A332D] mb-4">
-                <Heart className="w-5 h-5 text-[#D47A55]" />
-                空間について
-              </h3>
-              <p className="text-[#2C1E16]/80 leading-relaxed whitespace-pre-wrap">
-                {profile.design_atmosphere}
-              </p>
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="space-y-8">
+            <div className="inline-block px-4 py-1 border border-[#D97706] text-[#D97706] text-xs font-bold rounded-full">
+              OUR CONCEPT
             </div>
-          )}
-          
-          {profile.store_strengths && (
-            <div>
-              <h3 className="flex items-center justify-center gap-2 text-xl font-semibold text-[#4A332D] mb-4">
-                <Leaf className="w-5 h-5 text-[#D47A55]" />
-                こだわり
-              </h3>
-              <p className="text-[#2C1E16]/80 leading-relaxed whitespace-pre-wrap">
-                {profile.store_strengths}
-              </p>
+            <h2 className="text-4xl font-bold text-[#334155] leading-snug">
+              「{profile.store_name}」が提案する<br />心地よい日常の切り取り方
+            </h2>
+            <p className="text-slate-600 leading-relaxed text-lg">
+              {profile.store_strengths}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
+              <div className="flex gap-4">
+                <div className="w-12 h-12 bg-[#F8FAFC] flex items-center justify-center rounded-xl text-[#D97706]">
+                  <Coffee size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold">Specialty Coffee</h4>
+                  <p className="text-sm text-slate-500">選び抜かれた豆の香り</p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="w-12 h-12 bg-[#F8FAFC] flex items-center justify-center rounded-xl text-[#D97706]">
+                  <Clock size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold">22 Minutes Relax</h4>
+                  <p className="text-sm text-slate-500">丁度良い、極上の時間</p>
+                </div>
+              </div>
             </div>
-          )}
+          </div>
+          <div className="relative aspect-square rounded-3xl overflow-hidden bg-slate-100">
+            <img 
+              src={profile.image_urls?.[1] || 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80'}
+              alt="Interior"
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
       </div>
     </section>

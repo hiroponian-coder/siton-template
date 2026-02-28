@@ -2,30 +2,24 @@ import { getStoreProfile } from '@/lib/supabase';
 import Header from '@/components/Header';
 import PageHeader from '@/components/PageHeader';
 import MenuList from '@/components/MenuList';
-import CallToAction from '@/components/CallToAction';
+import StrategicCTASection from '@/components/StrategicCTASection';
 import Footer from '@/components/Footer';
 
-export default async function Menu() {
+export default async function MenuPage() {
   const siteId = process.env.NEXT_PUBLIC_SITE_ID;
   const profile = siteId ? await getStoreProfile(siteId) : null;
-  
-  if (!profile) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-[#2C1E16] bg-[#FDFBF7]">
-        <p className="text-xl">Site not found or profile missing.</p>
-      </div>
-    );
-  }
+
+  if (!profile) return null;
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <main className="bg-[#F8FAFC]">
       <Header profile={profile} />
-      <main className="flex-grow">
-        <PageHeader title="Menu" subtitle="こだわりの自家製メニュー" />
+      <PageHeader title="Menu" subtitle="厳選された素材が織りなす、至福のひととき" />
+      <div className="max-w-7xl mx-auto px-4 py-16">
         <MenuList profile={profile} />
-        <CallToAction profile={profile} />
-      </main>
+      </div>
+      <StrategicCTASection profile={profile} />
       <Footer profile={profile} />
-    </div>
+    </main>
   );
 }

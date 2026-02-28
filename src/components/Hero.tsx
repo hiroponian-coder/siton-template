@@ -1,37 +1,47 @@
+import { ArrowRight, Image as ImageIcon, Link as LinkIcon } from 'lucide-react'
 import { Profile } from '@/types/profile';
-import { Coffee } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Hero({ profile }: { profile: Profile }) {
-  const imageUrl = profile.image_urls?.[0];
+  const heroImage = profile.image_urls?.[0] || 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80';
 
   return (
-    <section className="relative w-full h-[80vh] min-h-[500px] flex items-center justify-center overflow-hidden bg-[#4A332D]">
-      {imageUrl ? (
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-overlay"
-          style={{ backgroundImage: `url(${imageUrl})` }}
-        />
-      ) : (
-        <div className="absolute inset-0 opacity-20 flex items-center justify-center">
-          <Coffee className="w-96 h-96 text-[#FDFBF7]" />
+    <section className="relative h-[90vh] flex items-center overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <ImageIcon
+          src={heroImage}
+          alt="Hero Background"
+          fill
+          className="object-cover brightness-50"
+          priority />
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
+        <div className="max-w-2xl">
+          <span className="inline-block text-[#D97706] font-semibold tracking-widest mb-4 animate-fade-in">MODERN & MINIMAL</span>
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            {profile.store_name}
+          </h1>
+          <p className="text-xl text-slate-200 mb-10 leading-relaxed">
+            都会の喧騒を離れ、上質なコーヒーと共に<br />贅沢な22分間の休息をあなたに。
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link 
+              href="/menu" 
+              className="px-8 py-4 bg-[#D97706] text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-[#B45309] transition-all transform hover:scale-105"
+            >
+              MENU VIEW <ArrowRight size={18} />
+            </Link>
+            {profile.address && (
+              <a 
+                href="#access" 
+                className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full font-bold text-center hover:bg-white/20 transition-all"
+              >
+                ACCESS
+              </a>
+            )}
+          </div>
         </div>
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#2C1E16]/90 to-transparent" />
-      
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto text-[#FDFBF7]">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-wider drop-shadow-lg">
-          {profile.store_name || 'Cafe Sighton'}
-        </h1>
-        {profile.design_atmosphere && (
-          <p className="text-xl md:text-2xl font-light mb-8 italic text-[#FDFBF7]/90 drop-shadow-md">
-            {profile.design_atmosphere}
-          </p>
-        )}
-        {profile.store_strengths && (
-          <p className="text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto bg-black/20 p-6 rounded-2xl backdrop-blur-sm">
-            {profile.store_strengths}
-          </p>
-        )}
       </div>
     </section>
   );
