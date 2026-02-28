@@ -1,37 +1,33 @@
+import { Coffee } from 'lucide-react'
 import { Profile } from '@/types/profile';
-import { Coffee } from 'lucide-react';
 
 export default function Hero({ profile }: { profile: Profile }) {
-  const imageUrl = profile.image_urls?.[0];
+  const mainImage = profile.image_urls && profile.image_urls.length > 0 
+    ? profile.image_urls[0] 
+    : 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070&auto=format&fit=crop';
 
   return (
-    <section className="relative w-full h-[80vh] min-h-[500px] flex items-center justify-center overflow-hidden bg-[#4A332D]">
-      {imageUrl ? (
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-overlay"
-          style={{ backgroundImage: `url(${imageUrl})` }}
-        />
-      ) : (
-        <div className="absolute inset-0 opacity-20 flex items-center justify-center">
-          <Coffee className="w-96 h-96 text-[#FDFBF7]" />
+    <section className="relative h-[80vh] w-full overflow-hidden flex items-center justify-center bg-[#2C3E50]">
+      <div className="absolute inset-0 opacity-60">
+        <img src={mainImage} alt={profile.store_name || 'Cafe Hero'} className="w-full h-full object-cover" />
+      </div>
+      <div className="relative z-10 text-center px-6">
+        <div className="mb-6 flex justify-center">
+          <div className="p-3 bg-[#D4A373] rounded-full">
+            <Coffee className="text-white" size={32} />
+          </div>
         </div>
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#2C1E16]/90 to-transparent" />
-      
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto text-[#FDFBF7]">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-wider drop-shadow-lg">
-          {profile.store_name || 'Cafe Sighton'}
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tighter">
+          {profile.store_name}
         </h1>
-        {profile.design_atmosphere && (
-          <p className="text-xl md:text-2xl font-light mb-8 italic text-[#FDFBF7]/90 drop-shadow-md">
-            {profile.design_atmosphere}
-          </p>
-        )}
-        {profile.store_strengths && (
-          <p className="text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto bg-black/20 p-6 rounded-2xl backdrop-blur-sm">
-            {profile.store_strengths}
-          </p>
-        )}
+        <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto font-light">
+          {profile.store_strengths || '都市の喧騒を忘れる、洗練されたひとときを。'}
+        </p>
+        <div className="mt-10">
+          <a href="#intro" className="inline-block px-8 py-4 bg-[#D4A373] text-white font-semibold rounded-sm hover:bg-[#c19262] transition-colors tracking-widest">
+            DISCOVER MORE
+          </a>
+        </div>
       </div>
     </section>
   );
