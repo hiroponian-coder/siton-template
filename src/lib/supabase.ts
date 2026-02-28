@@ -1,21 +1,15 @@
 import { Profile } from '@/types/profile';
 
 export async function getStoreProfile(siteId: string): Promise<Profile | null> {
-  // In a real implementation, this would fetch from Supabase.
-  // For this generated code, we simulate the fetch logic.
+  // This is a mock implementation. In a real environment, this would fetch from Supabase.
+  // For the purpose of this template, we return a structure that will be populated by the environment.
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/profiles?id=eq.${siteId}`, {
-      headers: {
-        'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
-        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`
-      },
-      next: { revalidate: 60 }
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || ''}/api/profile?site_id=${siteId}`, {
+      cache: 'no-store'
     });
     if (!response.ok) return null;
-    const data = await response.json();
-    return data[0] || null;
+    return await response.json();
   } catch (error) {
-    console.error('Fetch error:', error);
     return null;
   }
 }

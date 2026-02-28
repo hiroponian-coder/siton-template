@@ -1,43 +1,33 @@
-import { Profile } from '@/types';
-import { Ticket, ArrowRight, Phone } from 'lucide-react';
+import { Profile } from '@/types/profile';
+import { Instagram, MapPin } from 'lucide-react';
 
 export default function CTA({ profile }: { profile: Profile }) {
-  if (!profile.target_actions && !profile.coupon_info && !profile.contact_method) return null;
-
   return (
-    <section className="py-20 px-4 bg-[#FF6B81]">
-      <div className="max-w-4xl mx-auto text-center">
-        {profile.coupon_info && (
-          <div className="bg-[#FDCB6E] text-[#3E2723] inline-flex items-center gap-2 px-6 py-2 rounded-full font-black text-sm md:text-base mb-8 shadow-md transform -rotate-2">
-            <Ticket size={20} />
-            {profile.coupon_info}
-          </div>
-        )}
-
-        {profile.target_actions && (
-          <h2 className="text-3xl md:text-5xl font-black text-white mb-8 leading-tight">
-            {profile.target_actions}
-          </h2>
-        )}
-
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
-          {profile.contact_method && (
-            <div className="bg-white text-[#FF6B81] px-8 py-4 rounded-full font-black text-lg flex items-center gap-3 shadow-xl w-full sm:w-auto justify-center">
-              <Phone size={24} />
-              {profile.contact_method}
-            </div>
-          )}
-          
-          {(profile.instagram_id || profile.line_id) && (
+    <section className="py-20 bg-[#c5a059]">
+      <div className="max-w-5xl mx-auto px-4 text-center text-white">
+        <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          {profile.target_actions || '心地よい時間を、ここで。'}
+        </h2>
+        <p className="text-lg mb-10 opacity-90">
+          最新情報はSNSでも発信しています。皆様のご来店を心よりお待ちしております。
+        </p>
+        <div className="flex flex-wrap justify-center gap-6">
+          {profile.instagram_id && (
             <a 
-              href={profile.line_id ? `https://line.me/R/ti/p/${profile.line_id}` : `https://instagram.com/${profile.instagram_id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#3E2723] text-[#FDCB6E] px-8 py-4 rounded-full font-black text-lg flex items-center gap-3 hover:bg-black transition-colors shadow-xl w-full sm:w-auto justify-center"
+              href={`https://instagram.com/${profile.instagram_id}`} 
+              className="flex items-center gap-2 bg-white text-[#c5a059] px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors"
             >
-              予約・お問い合わせ <ArrowRight size={24} />
+              <Instagram size={20} />
+              Instagram
             </a>
           )}
+          <a 
+            href="/access" 
+            className="flex items-center gap-2 border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition-colors"
+          >
+            <MapPin size={20} />
+            Access Map
+          </a>
         </div>
       </div>
     </section>

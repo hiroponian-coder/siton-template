@@ -1,54 +1,46 @@
 import { getStoreProfile } from '@/lib/supabase';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import CTA from '@/components/CTA';
 
 export default async function MenuPage() {
   const siteId = process.env.NEXT_PUBLIC_SITE_ID;
   const profile = siteId ? await getStoreProfile(siteId) : null;
 
-  if (!profile) return <div>Site not found.</div>;
+  if (!profile || !profile.menu_items) return null;
 
-  const menuItems = profile.menu_items ? profile.menu_items.split('\n') : [];
+  const menuSections = profile.menu_items.split('\n');
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen pt-20">
       <Header profile={profile} />
       
-      <section className="bg-[#2d3436] py-32 text-white">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="mb-4 text-sm font-bold tracking-[0.4em] text-[#e17055]">MENU</h1>
-          <h2 className="text-4xl font-bold md:text-5xl">お品書き</h2>
-        </div>
-      </section>
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h1 className="text-5xl font-bold mb-4">MENU</h1>
+            <p className="text-[#c5a059] tracking-widest font-medium">お品書き</p>
+          </div>
 
-      <section className="py-24">
-        <div className="container mx-auto max-w-4xl px-6">
-          <div className="grid gap-16">
-            <div>
-              <h3 className="mb-10 border-b-2 border-[#e17055] pb-4 text-2xl font-bold text-[#2d3436]">COFFEE & DRINKS</h3>
-              <div className="space-y-6">
-                {menuItems.map((item, idx) => (
-                  <div key={idx} className="flex items-end justify-between border-b border-gray-100 pb-4">
-                    <div>
-                      <p className="text-lg font-bold text-[#2d3436]">{item.split(',')[0]}</p>
-                      <p className="text-sm text-gray-400">Selected from high-quality farms</p>
-                    </div>
-                    <p className="text-xl font-medium text-[#e17055]">{item.split(',')[1] || '---'}</p>
-                  </div>
-                ))}
-              </div>
+          <div className="bg-white p-12 shadow-sm rounded-2xl">
+            <div className="grid gap-8">
+              {menuSections.map((item, idx) => (
+                <div key={idx} className="flex justify-between items-baseline border-b border-dotted border-gray-200 pb-4">
+                  <span className="text-xl font-bold">{item}</span>
+                  <span className="text-[#c5a059] font-mono">ASK</span>
+                </div>
+              ))}
             </div>
-
             {profile.price_range && (
-              <div className="rounded-lg bg-[#f9f9f9] p-8">
-                <h4 className="mb-4 font-bold text-[#2d3436]">予算目安</h4>
-                <p className="text-[#e17055] text-2xl font-bold">{profile.price_range}</p>
-              </div>
+              <p className="mt-12 text-center text-gray-400 text-sm">
+                Price Range: {profile.price_range}
+              </p>
             )}
           </div>
         </div>
       </section>
 
+      <CTA profile={profile} />
       <Footer profile={profile} />
     </main>
   );
