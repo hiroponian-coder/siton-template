@@ -1,37 +1,33 @@
 import { getStoreProfile } from '@/lib/supabase';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import ConceptSection from '@/components/ConceptSection';
-import FeaturedMenu from '@/components/FeaturedMenu';
-import FeatureSection from '@/components/FeatureSection';
-import CallToAction from '@/components/CallToAction';
-import ShopInfo from '@/components/ShopInfo';
+import PhilosophySection from '@/components/PhilosophySection';
+import FeaturedMenuPreview from '@/components/FeaturedMenuPreview';
+import DynamicCTASection from '@/components/DynamicCTASection';
+import AccessInfo from '@/components/AccessInfo';
 import Footer from '@/components/Footer';
 
 export default async function Home() {
-  const siteId = process.env.NEXT_PUBLIC_SITE_ID;
-  const profile = siteId ? await getStoreProfile(siteId) : null;
-  
+  const siteId = process.env.NEXT_PUBLIC_SITE_ID || 'cafe-saiton-23';
+  const profile = await getStoreProfile(siteId);
+
   if (!profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-[#2C1E16] bg-[#FDFBF7]">
-        <p className="text-xl">Site not found or profile missing.</p>
+      <div className="flex h-screen items-center justify-center bg-[#F9F7F2]">
+        <p className="text-[#2C3E50] font-serif text-xl animate-pulse">Initializing Space...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <main className="bg-[#F9F7F2] min-h-screen">
       <Header profile={profile} />
-      <main className="flex-grow">
-        <Hero profile={profile} />
-        <ConceptSection profile={profile} />
-        <FeaturedMenu profile={profile} />
-        <FeatureSection profile={profile} />
-        <CallToAction profile={profile} />
-        <ShopInfo profile={profile} />
-      </main>
+      <Hero profile={profile} />
+      <PhilosophySection profile={profile} />
+      {profile.menu_items && <FeaturedMenuPreview profile={profile} />}
+      <DynamicCTASection profile={profile} />
+      <AccessInfo profile={profile} />
       <Footer profile={profile} />
-    </div>
+    </main>
   );
 }
