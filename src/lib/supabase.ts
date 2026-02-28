@@ -22,7 +22,7 @@ export async function getStoreProfile(siteId: string): Promise<Profile | null> {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ p_site_id: siteId }),
-        next: { revalidate: 60 }
+        cache: 'no-store'
       });
 
       if (!res.ok) {
