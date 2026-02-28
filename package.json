@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:worker": "npx @opennextjs/cloudflare build",
+    "build:worker": "npx @opennextjs/cloudflare build && cp .open-next/worker.js .open-next/_worker.js",
     "preview": "npm run build:worker && npx @opennextjs/cloudflare dev",
     "start": "next start",
     "lint": "eslint"
