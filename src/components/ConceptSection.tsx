@@ -1,43 +1,53 @@
+import { Award, Feather, Coffee } from 'lucide-react'
 import { Profile } from '@/types/profile';
-import { Leaf, Heart, Coffee } from 'lucide-react';
 
 export default function ConceptSection({ profile }: { profile: Profile }) {
-  if (!profile.store_strengths && !profile.design_atmosphere) return null;
-
   return (
-    <section className="py-24 px-4 bg-[#FDFBF7]">
-      <div className="max-w-4xl mx-auto text-center">
-        <div className="flex justify-center mb-6">
-          <Coffee className="w-8 h-8 text-[#D47A55]" />
-        </div>
-        <h2 className="text-3xl font-bold mb-12 text-[#4A332D]">Concept</h2>
-        
-        <div className="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-[#4A332D]/5 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#D47A55] to-[#4A332D]" />
-          
-          {profile.design_atmosphere && (
-            <div className="mb-10">
-              <h3 className="flex items-center justify-center gap-2 text-xl font-semibold text-[#4A332D] mb-4">
-                <Heart className="w-5 h-5 text-[#D47A55]" />
-                空間について
-              </h3>
-              <p className="text-[#2C1E16]/80 leading-relaxed whitespace-pre-wrap">
-                {profile.design_atmosphere}
-              </p>
+    <section className="py-24 bg-[#FFFFFF]">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="relative">
+            <div className="aspect-[4/5] bg-gray-100 rounded-2xl overflow-hidden shadow-2xl">
+              <img 
+                src={profile.image_urls && profile.image_urls[1] ? profile.image_urls[1] : "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1947"}
+                alt="Concept" 
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+              />
             </div>
-          )}
-          
-          {profile.store_strengths && (
-            <div>
-              <h3 className="flex items-center justify-center gap-2 text-xl font-semibold text-[#4A332D] mb-4">
-                <Leaf className="w-5 h-5 text-[#D47A55]" />
-                こだわり
-              </h3>
-              <p className="text-[#2C1E16]/80 leading-relaxed whitespace-pre-wrap">
-                {profile.store_strengths}
-              </p>
+            <div className="absolute -bottom-8 -right-8 bg-[#C9A050] p-12 hidden lg:block rounded-xl">
+              <Coffee className="w-12 h-12 text-white" />
             </div>
-          )}
+          </div>
+          
+          <div>
+            <h2 className="text-sm font-bold text-[#C9A050] tracking-[0.2em] uppercase mb-4">Our Concept</h2>
+            <h3 className="text-4xl font-bold text-[#1B2E35] mb-8 leading-tight">
+              {profile.store_strengths}
+            </h3>
+            <p className="text-gray-600 leading-loose mb-8">
+               都市の喧騒を離れ、静寂と美しさが共鳴する空間。私たちは単なるカフェではなく、お客様の五感を刺激し、心を整える特別な場所を提供します。
+            </p>
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 flex-shrink-0 bg-[#1B2E35]/5 flex items-center justify-center rounded-lg">
+                  <Award className="w-6 h-6 text-[#1B2E35]" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-[#1B2E35]">厳選された素材</h4>
+                  <p className="text-sm text-gray-500">世界中から選りすぐった豆を独自のプロファイルで焙煎。</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 flex-shrink-0 bg-[#1B2E35]/5 flex items-center justify-center rounded-lg">
+                  <Feather className="w-6 h-6 text-[#1B2E35]" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-[#1B2E35]">洗練された空間</h4>
+                  <p className="text-sm text-gray-500">ミニマリズムに基づいたモダンなインテリアと落ち着いた照明。</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
