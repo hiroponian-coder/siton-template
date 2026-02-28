@@ -2,8 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+:root {
+  --foreground-rgb: 45, 45, 45;
+  --background-start-rgb: 250, 250, 250;
+  --background-end-rgb: 250, 250, 250;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+}
+
+@layer base {
+  h1, h2, h3, h4 {
+    @apply tracking-tight;
   }
 }

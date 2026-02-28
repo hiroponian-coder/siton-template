@@ -1,60 +1,45 @@
 import { Profile } from '@/types/profile';
+import { Instagram, Twitter, MessageCircle, Link as LinkIcon } from 'lucide-react';
 import Link from 'next/link';
-import { Coffee, Instagram, Twitter, MessageCircle } from 'lucide-react';
 
 export default function Footer({ profile }: { profile: Profile }) {
   return (
-    <footer className="bg-[#2C1E16] text-[#FDFBF7]/80 py-16 px-4">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
-        <div>
-          <Link href="/" className="flex items-center gap-2 text-white mb-6">
-            <Coffee className="w-6 h-6 text-[#D47A55]" />
-            <span className="font-bold text-xl">{profile.store_name || 'Cafe Sighton'}</span>
-          </Link>
-          {profile.design_atmosphere && (
-            <p className="text-sm leading-relaxed max-w-xs">
-              {profile.design_atmosphere.slice(0, 100)}{profile.design_atmosphere.length > 100 ? '...' : ''}
+    <footer className="bg-[#FAFAFA] border-t border-[#1A1A1A]/5 py-16">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="grid md:grid-cols-4 gap-12 mb-12">
+          <div className="col-span-2">
+            <h3 className="text-2xl font-bold text-[#1A1A1A] mb-4">{profile.store_name}</h3>
+            <p className="text-[#2D2D2D]/60 max-w-xs leading-relaxed">
+              {profile.industry === 'カフェ' ? '特別な一杯、静かな空間。都会で最も洗練された体験を。' : '私たちのサービスで日常を豊かに。'}
             </p>
-          )}
-        </div>
-
-        <div>
-          <h3 className="text-white font-semibold mb-6">Explore</h3>
-          <ul className="space-y-4">
-            <li><Link href="/" className="hover:text-[#D47A55] transition-colors">Home</Link></li>
-            <li><Link href="/menu" className="hover:text-[#D47A55] transition-colors">Menu</Link></li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-white font-semibold mb-6">Connect</h3>
-          <div className="flex gap-4 mb-6">
-            {profile.instagram_id && (
-              <a href={`https://instagram.com/${profile.instagram_id}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-[#D47A55] hover:text-white transition-all">
-                <Instagram className="w-5 h-5" />
-              </a>
-            )}
-            {profile.x_id && (
-              <a href={`https://twitter.com/${profile.x_id}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-[#D47A55] hover:text-white transition-all">
-                <Twitter className="w-5 h-5" />
-              </a>
-            )}
-            {profile.line_id && (
-              <a href={`https://line.me/R/ti/p/@${profile.line_id}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-[#D47A55] hover:text-white transition-all">
-                <MessageCircle className="w-5 h-5" />
-              </a>
-            )}
           </div>
-          {profile.contact_method && (
-            <div className="text-sm">
-              <span className="block text-white/50 mb-1">Contact</span>
-              {profile.contact_method}
+          <div>
+            <h4 className="font-bold text-[#1A1A1A] mb-4">Navigation</h4>
+            <ul className="space-y-2">
+              <li><Link href="/" className="text-[#2D2D2D]/60 hover:text-[#D4A373]">Home</Link></li>
+              {profile.menu_items && <li><Link href="/menu" className="text-[#2D2D2D]/60 hover:text-[#D4A373]">Menu</Link></li>}
+              <li><Link href="/access" className="text-[#2D2D2D]/60 hover:text-[#D4A373]">Access</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-bold text-[#1A1A1A] mb-4">Connect</h4>
+            <div className="flex space-x-4">
+              {profile.instagram_id && (
+                <a href={`https://instagram.com/${profile.instagram_id}`} className="w-10 h-10 rounded-full border border-[#1A1A1A]/10 flex items-center justify-center text-[#1A1A1A] hover:bg-[#D4A373] hover:text-white hover:border-[#D4A373] transition-all">
+                  <Instagram size={18} />
+                </a>
+              )}
+              {profile.line_id && (
+                <a href={`https://line.me/R/ti/p/${profile.line_id}`} className="w-10 h-10 rounded-full border border-[#1A1A1A]/10 flex items-center justify-center text-[#1A1A1A] hover:bg-[#D4A373] hover:text-white hover:border-[#D4A373] transition-all">
+                  <MessageCircle size={18} />
+                </a>
+              )}
             </div>
-          )}
+          </div>
         </div>
-      </div>
-      <div className="max-w-6xl mx-auto mt-16 pt-8 border-t border-white/10 text-center text-sm text-white/50">
-        &copy; {new Date().getFullYear()} {profile.store_name || 'Cafe Sighton'}. All rights reserved.
+        <div className="pt-8 border-t border-[#1A1A1A]/5 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-[#2D2D2D]/40">© 2024 {profile.store_name}. All rights reserved.</p>
+        </div>
       </div>
     </footer>
   );

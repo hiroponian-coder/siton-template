@@ -1,37 +1,36 @@
 import { getStoreProfile } from '@/lib/supabase';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import ConceptSection from '@/components/ConceptSection';
-import FeaturedMenu from '@/components/FeaturedMenu';
 import FeatureSection from '@/components/FeatureSection';
-import CallToAction from '@/components/CallToAction';
-import ShopInfo from '@/components/ShopInfo';
+import MenuHighlight from '@/components/MenuHighlight';
+import AccessSection from '@/components/AccessSection';
 import Footer from '@/components/Footer';
+import { Metadata } from 'next';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const siteId = process.env.NEXT_PUBLIC_SITE_ID;
+  const profile = siteId ? await getStoreProfile(siteId) : null;
+  return {
+    title: profile?.store_name ? `${profile.store_name} | 洗練された香りと静寂が交差するモダンカフェ` : 'カフェサイトン２０',
+    description: '都会の喧騒を忘れさせるミニマルな空間で、厳選された豆を使用した一杯を提供します。'
+  };
+}
 
 export default async function Home() {
   const siteId = process.env.NEXT_PUBLIC_SITE_ID;
-  const profile = siteId ? await getStoreProfile(siteId) : null;
-  
-  if (!profile) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-[#2C1E16] bg-[#FDFBF7]">
-        <p className="text-xl">Site not found or profile missing.</p>
-      </div>
-    );
-  }
+  if (!siteId) return <div className="flex items-center justify-center h-screen">Environment variable NEXT_PUBLIC_SITE_ID is missing.</div>;
+
+  const profile = await getStoreProfile(siteId);
+  if (!profile) return <div className="flex items-center justify-center h-screen">Site not found or profile missing.</div>;
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <main className="bg-[#FAFAFA] min-h-screen pt-16">
       <Header profile={profile} />
-      <main className="flex-grow">
-        <Hero profile={profile} />
-        <ConceptSection profile={profile} />
-        <FeaturedMenu profile={profile} />
-        <FeatureSection profile={profile} />
-        <CallToAction profile={profile} />
-        <ShopInfo profile={profile} />
-      </main>
+      <Hero profile={profile} />
+      <FeatureSection profile={profile} />
+      {profile.menu_items && <MenuHighlight profile={profile} />}
+      <AccessSection profile={profile} />
       <Footer profile={profile} />
-    </div>
+    </main>
   );
 }
