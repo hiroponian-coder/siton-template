@@ -27,7 +27,11 @@ export default function SectionRenderer({ profile }: { profile: Profile }) {
       {visibleSections.map((section, index) => {
         const Component = sectionComponents[section.type]
         if (!Component) return null
-        return <Component key={`${section.type}-${index}`} profile={profile} />
+        return (
+          <div id={section.type} key={`${section.type}-${index}`}>
+            <Component profile={profile} />
+          </div>
+        )
       })}
     </>
   )

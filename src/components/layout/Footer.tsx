@@ -38,32 +38,34 @@ export default function Footer({ profile }: { profile: Profile }) {
           </ul>
         </div>
 
-        <div>
-          <h3 className="text-white font-semibold mb-6">Connect</h3>
-          <div className="flex gap-4 mb-6">
-            {profile.instagram_id && (
-              <a href={`https://instagram.com/${profile.instagram_id}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-theme-primary hover:text-white transition-all">
-                <Instagram className="w-5 h-5" />
-              </a>
-            )}
-            {profile.x_id && (
-              <a href={`https://twitter.com/${profile.x_id}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-theme-primary hover:text-white transition-all">
-                <Twitter className="w-5 h-5" />
-              </a>
-            )}
-            {profile.line_id && (
-              <a href={`https://line.me/R/ti/p/@${profile.line_id}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-theme-primary hover:text-white transition-all">
-                <MessageCircle className="w-5 h-5" />
-              </a>
+        {(profile.instagram_id || profile.x_id || profile.line_id || profile.contact_method) && (
+          <div>
+            <h3 className="text-white font-semibold mb-6">Connect</h3>
+            <div className="flex gap-4 mb-6">
+              {profile.instagram_id && (
+                <a href={`https://instagram.com/${profile.instagram_id}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-theme-primary hover:text-white transition-all">
+                  <Instagram className="w-5 h-5" />
+                </a>
+              )}
+              {profile.x_id && (
+                <a href={`https://twitter.com/${profile.x_id}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-theme-primary hover:text-white transition-all">
+                  <Twitter className="w-5 h-5" />
+                </a>
+              )}
+              {profile.line_id && (
+                <a href={`https://line.me/R/ti/p/@${profile.line_id}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-theme-primary hover:text-white transition-all">
+                  <MessageCircle className="w-5 h-5" />
+                </a>
+              )}
+            </div>
+            {profile.contact_method && (
+              <div className="text-sm">
+                <span className="block text-white/50 mb-1">{theme.copy.contactLabel}</span>
+                {profile.contact_method}
+              </div>
             )}
           </div>
-          {profile.contact_method && (
-            <div className="text-sm">
-              <span className="block text-white/50 mb-1">{theme.copy.contactLabel}</span>
-              {profile.contact_method}
-            </div>
-          )}
-        </div>
+        )}
       </div>
       <div className="max-w-6xl mx-auto mt-16 pt-8 border-t border-white/10 text-center text-sm text-white/50">
         &copy; {new Date().getFullYear()} {profile.store_name || 'Store'}. All rights reserved.
