@@ -3,9 +3,12 @@ import { getTheme } from '@/lib/theme'
 import { Ticket, Phone } from 'lucide-react'
 
 export default function CallToAction({ profile }: { profile: Profile }) {
-  if (!profile.target_actions && !profile.coupon_info && !profile.contact_method) return null
-
   const theme = getTheme()
+
+  // AI生成コピー or レガシーフィールドのどちらかがあれば表示
+  const hasCopy = !!(profile.cta_heading ?? theme.copy?.ctaHeading)
+  const hasContent = !!(profile.target_actions || profile.coupon_info || profile.contact_method)
+  if (!hasCopy && !hasContent) return null
 
   return (
     <section className="py-20 px-4 bg-theme-secondary text-theme-bg">
@@ -31,10 +34,14 @@ export default function CallToAction({ profile }: { profile: Profile }) {
           {profile.contact_method && (
             <div className="flex flex-col items-center justify-center gap-4">
               <div className="text-sm opacity-80 mb-2">{theme.copy?.contactLabel ?? 'ご予約・お問い合わせ'}</div>
-              <div className="flex items-center gap-3 text-2xl font-bold bg-theme-bg text-theme-secondary px-8 py-4 rounded-full shadow-lg">
+              <a
+                href={`tel:${profile.contact_method!.replace(/[-\s()]/g, '')}`}
+                className="flex items-center gap-3 text-2xl font-bold bg-theme-bg text-theme-secondary px-8 py-4 rounded-full shadow-lg hover:opacity-90 transition-opacity"
+                aria-label={`電話: ${profile.contact_method}`}
+              >
                 <Phone className="w-6 h-6 text-theme-primary" />
                 {profile.contact_method}
-              </div>
+              </a>
             </div>
           )}
         </div>

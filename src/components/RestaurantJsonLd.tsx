@@ -33,10 +33,13 @@ export default function RestaurantJsonLd({ profile }: { profile: Profile }) {
     jsonLd.servesCuisine = profile.industry
   }
 
+  // XSS対策: </script> が含まれるユーザー入力を安全にエスケープ
+  const safeJson = JSON.stringify(jsonLd).replace(/</g, '\\u003c')
+
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      dangerouslySetInnerHTML={{ __html: safeJson }}
     />
   )
 }
