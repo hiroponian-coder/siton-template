@@ -13,7 +13,7 @@ export default function Header({ profile }: { profile: Profile }) {
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 text-theme-secondary hover:opacity-80 transition-opacity">
           <BrandIcon className="w-6 h-6" />
-          <span className="font-heading font-bold text-lg tracking-wider">
+          <span className="font-heading text-lg tracking-wider">
             {profile.store_name || 'Store'}
           </span>
         </Link>

@@ -15,7 +15,7 @@ export default function ConceptSection({ profile }: { profile: Profile }) {
         <div className="flex justify-center mb-6">
           <BrandIcon className="w-8 h-8 text-theme-primary" />
         </div>
-        <h2 className="font-heading text-3xl font-bold mb-12 text-theme-secondary">
+        <h2 className="font-heading text-3xl mb-12 text-theme-secondary">
           {theme.copy.conceptTitle}
         </h2>
 

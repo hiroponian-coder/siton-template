@@ -10,9 +10,9 @@ export default function ShopInfo({ profile }: { profile: Profile }) {
   return (
     <section className="py-24 px-4 bg-theme-bg">
       <div className="max-w-4xl mx-auto">
-        <h2 className="font-heading text-3xl font-bold text-theme-secondary mb-12 flex items-center justify-center gap-3">
+        <h2 className="font-heading text-3xl text-theme-secondary mb-12 flex items-center justify-center gap-3">
           <MapPin className="w-8 h-8 text-theme-primary" />
-          Access
+          {theme.copy.storeInfoTitle}
         </h2>
 
         <div className="bg-theme-surface rounded-2xl p-8 md:p-12 shadow-sm border border-theme-secondary/10 flex flex-col md:flex-row gap-12">

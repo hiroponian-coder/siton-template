@@ -30,7 +30,7 @@ export default function RootLayout({
         <link rel="stylesheet" href={googleFontsUrl()} />
         <style dangerouslySetInnerHTML={{ __html: cssVars }} />
       </head>
-      <body className="bg-theme-bg text-theme-text antialiased font-body">
+      <body className="bg-theme-bg text-theme-text antialiased font-body" style={{ fontFamily: 'var(--font-family-body)' }}>
         {children}
       </body>
     </html>

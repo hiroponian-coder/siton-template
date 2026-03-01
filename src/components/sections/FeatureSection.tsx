@@ -18,7 +18,7 @@ export default function FeatureSection({ profile }: { profile: Profile }) {
   return (
     <section className="py-24 px-4 bg-theme-bg">
       <div className="max-w-6xl mx-auto">
-        <h2 className="font-heading text-3xl font-bold text-theme-secondary text-center mb-16">
+        <h2 className="font-heading text-3xl text-theme-secondary text-center mb-16">
           {theme.copy.storeInfoTitle}
         </h2>
 

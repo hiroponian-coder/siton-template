@@ -10,7 +10,7 @@ export default function CallToAction({ profile }: { profile: Profile }) {
   return (
     <section className="py-20 px-4 bg-theme-secondary text-theme-bg">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="font-heading text-3xl font-bold mb-8">{theme.copy.ctaHeading}</h2>
+        <h2 className="font-heading text-3xl mb-8">{theme.copy.ctaHeading}</h2>
 
         {theme.copy.ctaSubtext && (
           <p className="text-lg mb-8 opacity-80">{theme.copy.ctaSubtext}</p>

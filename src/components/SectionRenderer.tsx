@@ -22,10 +22,10 @@ export default function SectionRenderer({ profile }: { profile: Profile }) {
 
   return (
     <>
-      {visibleSections.map((section) => {
+      {visibleSections.map((section, index) => {
         const Component = sectionComponents[section.type]
         if (!Component) return null
-        return <Component key={section.type} profile={profile} />
+        return <Component key={`${section.type}-${index}`} profile={profile} />
       })}
     </>
   )

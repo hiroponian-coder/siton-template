@@ -19,7 +19,7 @@ export default function FeaturedMenu({ profile }: { profile: Profile }) {
     <section className="py-24 px-4 bg-theme-secondary/5">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="font-heading text-3xl font-bold text-theme-secondary mb-4">
+          <h2 className="font-heading text-3xl text-theme-secondary mb-4">
             {theme.copy.featuredMenuTitle}
           </h2>
           <p className="text-theme-text/70">{theme.copy.featuredMenuSubtitle}</p>

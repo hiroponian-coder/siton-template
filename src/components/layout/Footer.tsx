@@ -14,7 +14,7 @@ export default function Footer({ profile }: { profile: Profile }) {
         <div>
           <Link href="/" className="flex items-center gap-2 text-white mb-6">
             <BrandIcon className="w-6 h-6 text-theme-primary" />
-            <span className="font-heading font-bold text-xl">{profile.store_name || 'Store'}</span>
+            <span className="font-heading text-xl">{profile.store_name || 'Store'}</span>
           </Link>
           {theme.copy.footerTagline ? (
             <p className="text-sm leading-relaxed max-w-xs">{theme.copy.footerTagline}</p>

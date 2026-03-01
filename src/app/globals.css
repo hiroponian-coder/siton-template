@@ -9,6 +9,10 @@
   --color-theme-text: var(--color-text);
   --color-theme-muted: var(--color-text-muted);
   --color-theme-footer: var(--color-footer);
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
+  --font-family-heading: var(--font-family-heading);
+  --font-family-body: var(--font-family-body);
+}
+
+.font-heading {
+  font-weight: var(--font-weight-heading, 700);
 }

@@ -22,7 +22,7 @@ export default function Hero({ profile }: { profile: Profile }) {
       <div className="absolute inset-0 bg-gradient-to-t from-theme-footer/90 to-transparent" />
 
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto text-theme-bg">
-        <h1 className="font-heading text-4xl md:text-6xl font-bold mb-6 tracking-wider drop-shadow-lg">
+        <h1 className="font-heading text-4xl md:text-6xl mb-6 tracking-wider drop-shadow-lg">
           {profile.store_name || 'Store'}
         </h1>
         {(theme.copy.heroTagline ?? profile.design_atmosphere) && (
