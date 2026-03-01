@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "colors": {
+    "primary": "#D47A55",
+    "secondary": "#4A332D",
+    "accent": "#E8956A",
+    "background": "#FDFBF7",
+    "surface": "#FFFFFF",
+    "text": "#2C1E16",
+    "textMuted": "#2C1E1680",
+    "footer": "#2C1E16"
+  },
+  "typography": {
+    "headingFont": "Inter",
+    "bodyFont": "Inter",
+    "headingWeight": "bold"
+  },
+  "meta": {
+    "title": "カフェサイトン | 心温まるシカ焙煎コーヒー",
+    "description": "自慢の「シカ焙煎コーヒー」と温もりあふれる空間を提供するカフェサイトンの公式サイトです。"
+  },
+  "copy": {
+    "heroTagline": null,
+    "heroSubtitle": null,
+    "conceptTitle": "Concept",
+    "conceptSubtitles": {
+      "atmosphere": "空間について",
+      "strength": "こだわり"
+    },
+    "featuredMenuTitle": "Featured Menu",
+    "featuredMenuSubtitle": "当店おすすめのメニュー",
+    "storeInfoTitle": "Store Information",
+    "ctaHeading": "皆様のご来店をお待ちしております",
+    "ctaSubtext": null,
+    "footerTagline": null,
+    "contactLabel": "ご予約・お問い合わせ"
+  },
+  "sections": [
+    { "type": "hero", "visible": true },
+    { "type": "concept", "visible": true },
+    { "type": "featured-menu", "visible": true },
+    { "type": "features", "visible": true },
+    { "type": "cta", "visible": true },
+    { "type": "shop-info", "visible": true }
+  ],
+  "navigation": {
+    "items": [
+      { "label": "Home", "href": "/" }
+    ],
+    "brandIcon": "Coffee"
+  },
+  "images": {
+    "heroUrls": [],
+    "galleryUrls": []
+  },
+  "branding": {
+    "showPoweredBy": true
+  }
+}

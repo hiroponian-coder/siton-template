@@ -1,1 +1,0 @@
-import PageTitle from '@/components/PageTitle'; import Story from '@/components/about/Story'; import Gallery from '@/components/about/Gallery'; export default function About() { return ( <div> <PageTitle title="About Us" description="カフェサイトンの哲学、インテリアへのこだわり、そして私たちが提供する体験について。" /> <Story /> <Gallery /> </div> ); }
