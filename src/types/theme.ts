@@ -48,6 +48,7 @@ export interface SiteTheme {
     conceptUrls: string[]
     menuUrls: string[]
   }
+  menuItems?: Array<{ url: string; name?: string; price?: string }>
   branding: {
     showPoweredBy: boolean
   }
