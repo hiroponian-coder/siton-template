@@ -16,11 +16,16 @@ function extractGoogleMapsEmbedUrl(input: string): string | null {
   return null
 }
 
+function buildAddressEmbedUrl(address: string): string {
+  return `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed&z=16`
+}
+
 export default function ShopInfo({ profile }: { profile: Profile }) {
   if (!profile.address && !profile.access_info) return null
 
   const theme = getTheme()
-  const mapsUrl = profile.google_maps_url ? extractGoogleMapsEmbedUrl(profile.google_maps_url) : null
+  const userMapsUrl = profile.google_maps_url ? extractGoogleMapsEmbedUrl(profile.google_maps_url) : null
+  const mapsUrl = profile.address ? buildAddressEmbedUrl(profile.address) : userMapsUrl
   const showMap = !!mapsUrl
 
   return (
@@ -65,7 +70,7 @@ export default function ShopInfo({ profile }: { profile: Profile }) {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                sandbox="allow-scripts"
+                sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"
               />
             ) : (
               <div className="text-center text-theme-text/50 p-6">
