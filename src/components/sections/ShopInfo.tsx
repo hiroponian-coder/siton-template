@@ -2,21 +2,26 @@ import { Profile } from '@/types/profile'
 import { getTheme } from '@/lib/theme'
 import { MapPin } from 'lucide-react'
 
-function isValidGoogleMapsEmbedUrl(url: string): boolean {
+function extractGoogleMapsEmbedUrl(input: string): string | null {
+  // iframe タグから src を抽出
+  const srcMatch = input.match(/<iframe[^>]+src=["']([^"']+)["']/)
+  const url = srcMatch ? srcMatch[1] : input
+
   try {
     const parsed = new URL(url)
-    return parsed.protocol === 'https:' && parsed.hostname === 'www.google.com' && parsed.pathname.startsWith('/maps/embed')
-  } catch {
-    return false
-  }
+    if (parsed.protocol === 'https:' && parsed.hostname === 'www.google.com' && parsed.pathname.startsWith('/maps/embed')) {
+      return url
+    }
+  } catch { /* invalid URL */ }
+  return null
 }
 
 export default function ShopInfo({ profile }: { profile: Profile }) {
   if (!profile.address && !profile.access_info) return null
 
   const theme = getTheme()
-  const mapsUrl = profile.google_maps_url
-  const showMap = mapsUrl && isValidGoogleMapsEmbedUrl(mapsUrl)
+  const mapsUrl = profile.google_maps_url ? extractGoogleMapsEmbedUrl(profile.google_maps_url) : null
+  const showMap = !!mapsUrl
 
   return (
     <section className="py-24 px-4 bg-theme-bg">
