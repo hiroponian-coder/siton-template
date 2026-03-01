@@ -2,10 +2,21 @@ import { Profile } from '@/types/profile'
 import { getTheme } from '@/lib/theme'
 import { MapPin } from 'lucide-react'
 
+function isValidGoogleMapsEmbedUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url)
+    return parsed.hostname === 'www.google.com' && parsed.pathname.startsWith('/maps/embed')
+  } catch {
+    return false
+  }
+}
+
 export default function ShopInfo({ profile }: { profile: Profile }) {
   if (!profile.address && !profile.access_info) return null
 
   const theme = getTheme()
+  const mapsUrl = profile.google_maps_url
+  const showMap = mapsUrl && isValidGoogleMapsEmbedUrl(mapsUrl)
 
   return (
     <section className="py-24 px-4 bg-theme-bg">
@@ -39,12 +50,25 @@ export default function ShopInfo({ profile }: { profile: Profile }) {
             )}
           </div>
 
-          <div className="flex-1 flex items-center justify-center bg-theme-secondary/5 rounded-xl border border-theme-secondary/10 min-h-[250px]">
-            <div className="text-center text-theme-text/50 p-6">
-              <MapPin className="w-12 h-12 mx-auto mb-4 text-theme-secondary/30" />
-              <p>Map Location</p>
-              {profile.address && <p className="text-sm mt-2 max-w-[200px] mx-auto">{profile.address}</p>}
-            </div>
+          <div className="flex-1 flex items-center justify-center bg-theme-secondary/5 rounded-xl border border-theme-secondary/10 min-h-[250px] overflow-hidden">
+            {showMap ? (
+              <iframe
+                src={mapsUrl}
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: '250px' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                sandbox="allow-scripts allow-same-origin allow-popups"
+              />
+            ) : (
+              <div className="text-center text-theme-text/50 p-6">
+                <MapPin className="w-12 h-12 mx-auto mb-4 text-theme-secondary/30" />
+                <p>Map Location</p>
+                {profile.address && <p className="text-sm mt-2 max-w-[200px] mx-auto">{profile.address}</p>}
+              </div>
+            )}
           </div>
         </div>
       </div>

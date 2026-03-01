@@ -6,6 +6,7 @@ export default function FeaturedMenu({ profile }: { profile: Profile }) {
   if (!profile.menu_items) return null
 
   const theme = getTheme()
+  const menuUrls = theme.images.menuUrls ?? []
 
   const menuList = profile.menu_items
     .split(/[\n,]/)
@@ -26,14 +27,32 @@ export default function FeaturedMenu({ profile }: { profile: Profile }) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {menuList.map((item, idx) => (
-            <div key={idx} className="bg-theme-surface rounded-2xl p-8 shadow-sm border border-theme-secondary/10 hover:shadow-md transition-shadow group flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-theme-primary/10 flex items-center justify-center mb-6 group-hover:bg-theme-primary/20 transition-colors">
-                <Utensils className="w-8 h-8 text-theme-primary" />
+          {menuList.map((item, idx) => {
+            const imageUrl = menuUrls[idx]
+            return (
+              <div key={idx} className="bg-theme-surface rounded-2xl shadow-sm border border-theme-secondary/10 hover:shadow-md transition-shadow group overflow-hidden flex flex-col">
+                {imageUrl ? (
+                  <div className="aspect-video overflow-hidden">
+                    <img
+                      src={imageUrl}
+                      alt=""
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
+                ) : (
+                  <div className="flex justify-center pt-8">
+                    <div className="w-16 h-16 rounded-full bg-theme-primary/10 flex items-center justify-center group-hover:bg-theme-primary/20 transition-colors">
+                      <Utensils className="w-8 h-8 text-theme-primary" />
+                    </div>
+                  </div>
+                )}
+                <div className="p-6 flex-1 flex items-center justify-center text-center">
+                  <h3 className="text-lg font-semibold text-theme-text">{item}</h3>
+                </div>
               </div>
-              <h3 className="text-lg font-semibold text-theme-text">{item}</h3>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

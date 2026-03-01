@@ -2,6 +2,7 @@ import { getTheme } from '@/lib/theme'
 import type { Profile } from '@/types/profile'
 import Hero from '@/components/sections/Hero'
 import ConceptSection from '@/components/sections/ConceptSection'
+import GallerySection from '@/components/sections/GallerySection'
 import FeaturedMenu from '@/components/sections/FeaturedMenu'
 import FeatureSection from '@/components/sections/FeatureSection'
 import CallToAction from '@/components/sections/CallToAction'
@@ -10,6 +11,7 @@ import ShopInfo from '@/components/sections/ShopInfo'
 const sectionComponents = {
   'hero': Hero,
   'concept': ConceptSection,
+  'gallery': GallerySection,
   'featured-menu': FeaturedMenu,
   'features': FeatureSection,
   'cta': CallToAction,

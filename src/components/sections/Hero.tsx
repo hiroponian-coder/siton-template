@@ -8,7 +8,7 @@ export default function Hero({ profile }: { profile: Profile }) {
   const BrandIcon = resolveIcon(theme.navigation.brandIcon)
 
   return (
-    <section className="relative w-full h-[80vh] min-h-[500px] flex items-center justify-center overflow-hidden bg-theme-secondary">
+    <section className="relative w-full h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden bg-theme-secondary">
       {imageUrl ? (
         <div
           className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-overlay"

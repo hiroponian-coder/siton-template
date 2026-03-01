@@ -20,4 +20,5 @@ export interface Profile {
   x_id?: string | null;
   coupon_info?: string | null;
   image_urls?: any[] | null;
+  google_maps_url?: string | null;
 }

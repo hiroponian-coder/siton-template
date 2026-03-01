@@ -31,9 +31,11 @@ export interface SiteTheme {
     ctaSubtext: string | null
     footerTagline: string | null
     contactLabel: string
+    galleryTitle: string
+    gallerySubtitle: string | null
   }
   sections: Array<{
-    type: 'hero' | 'concept' | 'featured-menu' | 'features' | 'cta' | 'shop-info'
+    type: 'hero' | 'concept' | 'gallery' | 'featured-menu' | 'features' | 'cta' | 'shop-info'
     visible: boolean
   }>
   navigation: {
@@ -43,6 +45,8 @@ export interface SiteTheme {
   images: {
     heroUrls: string[]
     galleryUrls: string[]
+    conceptUrls: string[]
+    menuUrls: string[]
   }
   branding: {
     showPoweredBy: boolean
