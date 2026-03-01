@@ -5,7 +5,7 @@ import { MapPin } from 'lucide-react'
 function isValidGoogleMapsEmbedUrl(url: string): boolean {
   try {
     const parsed = new URL(url)
-    return parsed.hostname === 'www.google.com' && parsed.pathname.startsWith('/maps/embed')
+    return parsed.protocol === 'https:' && parsed.hostname === 'www.google.com' && parsed.pathname.startsWith('/maps/embed')
   } catch {
     return false
   }
@@ -60,7 +60,7 @@ export default function ShopInfo({ profile }: { profile: Profile }) {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                sandbox="allow-scripts allow-same-origin allow-popups"
+                sandbox="allow-scripts"
               />
             ) : (
               <div className="text-center text-theme-text/50 p-6">

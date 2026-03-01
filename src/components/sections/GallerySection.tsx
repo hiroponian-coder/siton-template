@@ -15,7 +15,7 @@ export default function GallerySection({ profile: _profile }: { profile: Profile
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="font-heading text-3xl text-theme-secondary mb-4">
-            {theme.copy.galleryTitle}
+            {theme.copy.galleryTitle || 'ギャラリー'}
           </h2>
           {theme.copy.gallerySubtitle && (
             <p className="text-theme-text/70">{theme.copy.gallerySubtitle}</p>
