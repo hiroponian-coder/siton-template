@@ -28,7 +28,7 @@ export default function SectionRenderer({ profile }: { profile: Profile }) {
         const Component = sectionComponents[section.type]
         if (!Component) return null
         return (
-          <div id={section.type} key={`${section.type}-${index}`}>
+          <div id={section.type} key={`${section.type}-${index}`} className="scroll-mt-20">
             <Component profile={profile} />
           </div>
         )
