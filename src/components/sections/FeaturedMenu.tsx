@@ -15,9 +15,9 @@ export default function FeaturedMenu({ profile }: { profile: Profile }) {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-heading text-3xl text-theme-secondary mb-4">
-              {theme.copy.featuredMenuTitle}
+              {theme.copy?.featuredMenuTitle ?? 'おすすめメニュー'}
             </h2>
-            <p className="text-theme-text/70">{theme.copy.featuredMenuSubtitle}</p>
+            <p className="text-theme-text/70">{theme.copy?.featuredMenuSubtitle}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -63,9 +63,9 @@ export default function FeaturedMenu({ profile }: { profile: Profile }) {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="font-heading text-3xl text-theme-secondary mb-4">
-            {theme.copy.featuredMenuTitle}
+            {theme.copy?.featuredMenuTitle ?? 'おすすめメニュー'}
           </h2>
-          <p className="text-theme-text/70">{theme.copy.featuredMenuSubtitle}</p>
+          <p className="text-theme-text/70">{theme.copy?.featuredMenuSubtitle}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

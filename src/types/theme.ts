@@ -19,20 +19,20 @@ export interface SiteTheme {
     title: string
     description: string
   }
-  copy: {
-    heroTagline: string | null
-    heroSubtitle: string | null
-    conceptTitle: string
-    conceptSubtitles: { atmosphere: string; strength: string }
-    featuredMenuTitle: string
-    featuredMenuSubtitle: string
-    storeInfoTitle: string
-    ctaHeading: string
-    ctaSubtext: string | null
-    footerTagline: string | null
-    contactLabel: string
-    galleryTitle: string
-    gallerySubtitle: string | null
+  copy?: {
+    heroTagline?: string | null
+    heroSubtitle?: string | null
+    conceptTitle?: string
+    conceptSubtitles?: { atmosphere?: string; strength?: string }
+    featuredMenuTitle?: string
+    featuredMenuSubtitle?: string
+    storeInfoTitle?: string
+    ctaHeading?: string
+    ctaSubtext?: string | null
+    footerTagline?: string | null
+    contactLabel?: string
+    galleryTitle?: string
+    gallerySubtitle?: string | null
   }
   sections: Array<{
     type: 'hero' | 'concept' | 'gallery' | 'featured-menu' | 'features' | 'cta' | 'shop-info'

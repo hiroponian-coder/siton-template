@@ -10,10 +10,10 @@ export default function CallToAction({ profile }: { profile: Profile }) {
   return (
     <section className="py-20 px-4 bg-theme-secondary text-theme-bg">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="font-heading text-3xl mb-8">{theme.copy.ctaHeading}</h2>
+        <h2 className="font-heading text-3xl mb-8">{profile.cta_heading ?? theme.copy?.ctaHeading ?? 'お問い合わせ'}</h2>
 
-        {theme.copy.ctaSubtext && (
-          <p className="text-lg mb-8 opacity-80">{theme.copy.ctaSubtext}</p>
+        {(profile.cta_subtext ?? theme.copy?.ctaSubtext) && (
+          <p className="text-lg mb-8 opacity-80">{profile.cta_subtext ?? theme.copy?.ctaSubtext}</p>
         )}
 
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
@@ -30,7 +30,7 @@ export default function CallToAction({ profile }: { profile: Profile }) {
 
           {profile.contact_method && (
             <div className="flex flex-col items-center justify-center gap-4">
-              <div className="text-sm opacity-80 mb-2">{theme.copy.contactLabel}</div>
+              <div className="text-sm opacity-80 mb-2">{theme.copy?.contactLabel ?? 'ご予約・お問い合わせ'}</div>
               <div className="flex items-center gap-3 text-2xl font-bold bg-theme-bg text-theme-secondary px-8 py-4 rounded-full shadow-lg">
                 <Phone className="w-6 h-6 text-theme-primary" />
                 {profile.contact_method}

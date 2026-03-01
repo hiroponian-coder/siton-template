@@ -21,4 +21,10 @@ export interface Profile {
   coupon_info?: string | null;
   image_urls?: any[] | null;
   google_maps_url?: string | null;
+  hero_tagline?: string | null;
+  hero_subtitle?: string | null;
+  cta_heading?: string | null;
+  cta_subtext?: string | null;
+  footer_tagline?: string | null;
+  phone_number?: string | null;
 }

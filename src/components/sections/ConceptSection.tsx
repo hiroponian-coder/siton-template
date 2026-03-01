@@ -17,7 +17,7 @@ export default function ConceptSection({ profile }: { profile: Profile }) {
           <BrandIcon className="w-8 h-8 text-theme-primary" />
         </div>
         <h2 className="font-heading text-3xl mb-12 text-theme-secondary">
-          {theme.copy.conceptTitle}
+          {theme.copy?.conceptTitle ?? 'コンセプト'}
         </h2>
 
         <div className={`flex ${conceptImage ? 'flex-col md:flex-row gap-8 md:gap-12 text-left' : 'justify-center'}`}>
@@ -40,7 +40,7 @@ export default function ConceptSection({ profile }: { profile: Profile }) {
                 <div className="mb-10">
                   <h3 className={`flex items-center ${conceptImage ? 'justify-start' : 'justify-center'} gap-2 text-xl font-semibold text-theme-secondary mb-4`}>
                     <Heart className="w-5 h-5 text-theme-primary" />
-                    {theme.copy.conceptSubtitles.atmosphere}
+                    {theme.copy?.conceptSubtitles?.atmosphere ?? '雰囲気'}
                   </h3>
                   <p className="text-theme-text/80 leading-relaxed whitespace-pre-wrap">
                     {profile.design_atmosphere}
@@ -52,7 +52,7 @@ export default function ConceptSection({ profile }: { profile: Profile }) {
                 <div>
                   <h3 className={`flex items-center ${conceptImage ? 'justify-start' : 'justify-center'} gap-2 text-xl font-semibold text-theme-secondary mb-4`}>
                     <Leaf className="w-5 h-5 text-theme-primary" />
-                    {theme.copy.conceptSubtitles.strength}
+                    {theme.copy?.conceptSubtitles?.strength ?? 'こだわり'}
                   </h3>
                   <p className="text-theme-text/80 leading-relaxed whitespace-pre-wrap">
                     {profile.store_strengths}

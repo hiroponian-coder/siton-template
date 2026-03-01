@@ -19,7 +19,7 @@ export default function FeatureSection({ profile }: { profile: Profile }) {
     <section className="py-24 px-4 bg-theme-bg">
       <div className="max-w-6xl mx-auto">
         <h2 className="font-heading text-3xl text-theme-secondary text-center mb-16">
-          {theme.copy.storeInfoTitle}
+          {theme.copy?.storeInfoTitle ?? '店舗情報'}
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

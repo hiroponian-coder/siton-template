@@ -1,6 +1,6 @@
 import { Profile } from '@/types/profile'
 import { getTheme } from '@/lib/theme'
-import { MapPin } from 'lucide-react'
+import { MapPin, Clock, Phone, Navigation } from 'lucide-react'
 
 function extractGoogleMapsEmbedUrl(input: string): string | null {
   // iframe タグから src を抽出
@@ -33,7 +33,7 @@ export default function ShopInfo({ profile }: { profile: Profile }) {
       <div className="max-w-4xl mx-auto">
         <h2 className="font-heading text-3xl text-theme-secondary mb-12 flex items-center justify-center gap-3">
           <MapPin className="w-8 h-8 text-theme-primary" />
-          {theme.copy.storeInfoTitle}
+          {theme.copy?.storeInfoTitle ?? 'アクセス'}
         </h2>
 
         <div className="bg-theme-surface rounded-2xl p-8 md:p-12 shadow-sm border border-theme-secondary/10 flex flex-col md:flex-row gap-12">
@@ -57,6 +57,40 @@ export default function ShopInfo({ profile }: { profile: Profile }) {
                 <div className="text-sm text-theme-text/60 mb-1">アクセス</div>
                 <div className="text-lg text-theme-text">{profile.access_info}</div>
               </div>
+            )}
+
+            {profile.business_hours && (
+              <div>
+                <div className="text-sm text-theme-text/60 mb-1 flex items-center gap-1">
+                  <Clock className="w-3.5 h-3.5" />
+                  営業時間
+                </div>
+                <div className="text-lg text-theme-text">{profile.business_hours}</div>
+              </div>
+            )}
+
+            {profile.phone_number && (
+              <div>
+                <div className="text-sm text-theme-text/60 mb-1 flex items-center gap-1">
+                  <Phone className="w-3.5 h-3.5" />
+                  電話番号
+                </div>
+                <a href={`tel:${profile.phone_number.replace(/[-\s]/g, '')}`} className="text-lg text-theme-primary font-medium hover:underline">
+                  {profile.phone_number}
+                </a>
+              </div>
+            )}
+
+            {profile.address && (
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(profile.address)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-theme-primary text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:opacity-90 transition-opacity mt-2"
+              >
+                <Navigation className="w-4 h-4" />
+                経路案内
+              </a>
             )}
           </div>
 

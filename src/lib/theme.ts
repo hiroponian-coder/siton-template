@@ -25,6 +25,11 @@ function validateTheme(data: unknown): SiteTheme {
   const sections = t.sections
   if (!Array.isArray(sections)) throw new Error('theme.json: missing sections array')
 
+  // v2 互換: copy が無い theme.json でもパスする（コンポーネント側でフォールバック）
+  if (!t.copy || typeof t.copy !== 'object') {
+    ;(t as any).copy = {}
+  }
+
   return data as SiteTheme
 }
 

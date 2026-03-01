@@ -16,8 +16,8 @@ export default function Footer({ profile }: { profile: Profile }) {
             <BrandIcon className="w-6 h-6 text-theme-primary" />
             <span className="font-heading text-xl">{profile.store_name || 'Store'}</span>
           </Link>
-          {theme.copy.footerTagline ? (
-            <p className="text-sm leading-relaxed max-w-xs">{theme.copy.footerTagline}</p>
+          {(profile.footer_tagline ?? theme.copy?.footerTagline) ? (
+            <p className="text-sm leading-relaxed max-w-xs">{profile.footer_tagline ?? theme.copy?.footerTagline}</p>
           ) : profile.design_atmosphere ? (
             <p className="text-sm leading-relaxed max-w-xs">
               {profile.design_atmosphere.slice(0, 100)}{profile.design_atmosphere.length > 100 ? '...' : ''}
@@ -62,7 +62,7 @@ export default function Footer({ profile }: { profile: Profile }) {
             )}
             {profile.contact_method && (
               <div className="text-sm">
-                <span className="block text-white/50 mb-1">{theme.copy.contactLabel}</span>
+                <span className="block text-white/50 mb-1">{theme.copy?.contactLabel ?? 'ご予約・お問い合わせ'}</span>
                 {profile.contact_method}
               </div>
             )}
