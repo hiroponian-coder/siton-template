@@ -1,9 +1,12 @@
+import { connection } from 'next/server';
 import { Profile } from '@/types/profile';
 
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 1000;
 
 export async function getStoreProfile(siteId: string): Promise<Profile | null> {
+  await connection();
+
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
